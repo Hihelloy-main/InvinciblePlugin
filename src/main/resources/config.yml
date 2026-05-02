@@ -1,0 +1,1740 @@
+settings:
+  # Worlds where InvinciblePlugin is fully disabled — no abilities, flight, or scoreboard.
+  # Add world names (case-insensitive). Reloads with /invadmin reload.
+  disabled-worlds:
+    - world_nether
+    - world_the_end
+
+  action-bar-update-interval: 4
+  scoreboard-update-interval: 10
+  block-restore-ticks: 600
+  stat-points-per-kill: 3
+  max-stat-level: 30
+  base-fly-speed: 0.025
+  max-fly-speed: 0.075
+  base-walk-speed: 0.2
+  max-walk-speed: 0.28
+
+flight:
+  pose-enabled: true
+  speed-threshold: 0.3
+  glide-speed: 0.8
+  foot-particles-enabled: true
+  foot-particle-type: CLOUD
+  particle-count: 18
+  particle-spread: 0.35
+  particle-speed: 0.04
+  landing-shockwave-enabled: true
+  landing-shockwave-radius: 6.0
+  landing-shockwave-rings: 5
+  landing-shockwave-particle: BLOCK
+  landing-shockwave-sound: ENTITY_GENERIC_EXPLODE
+  landing-shockwave-sound-volume: 1.2
+  landing-shockwave-sound-pitch: 0.6
+  phase-through-blocks: true
+  break-blocks: true
+  break-reach: 2.5
+  break-radius: 0.9
+  break-side-radius: 1.5
+
+combat:
+  iframe-ticks: 8
+  combo-window-ms: 2000
+  backstab-bonus: 0.30
+  momentum-bonus: 0.20
+
+messages:
+  character-selected: "&aYou have become &e%character%&a!"
+  ability-bound: "&aAbility &e%ability% &abound to slot &e%slot%&a!"
+  no-character: "&cYou have not selected a character yet!"
+  no-permission: "&cYou do not have permission to do that!"
+  stat-upgraded: "&aUpgraded &e%stat% &ato level &e%level%&a!"
+  points-given: "&aGiven &e%amount% &astat points to &e%player%&a!"
+
+universal-slot-5:
+  cooldown-ms: 3000
+  velocity: 3.8
+  range: 4.5
+
+universal-slot-6:
+  cooldown-ms: 6000
+  damage: 6.0
+  range: 5.0
+  velocity: 1.8
+  hold-ticks: 40
+
+stats:
+  damage-stat-per-level: 0.2
+  speed-stat-per-level: 0.010
+  duration-stat-per-level: 0.04
+  defense-stat-per-level: 0.033
+  regen-stat-per-level: 1
+  regen-max-amplifier: 2
+  regen-amplifier-divisor: 4
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ABILITY CONFIGURATION
+# Max HP = 20 (10 hearts). No move should one-shot a full HP player.
+# Damage guide: Light=2-5, Medium=5-9, Heavy=9-13, Ultimate=13-14 (cap)
+# Radius guide: Small=3-5, Medium=5-8, Large=8-12 (never scale with dmg stat)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+abilities:
+
+  # ── INVINCIBLE ─────────────────────────────────────────────────────────────
+  INVULNERABILITY:
+    enabled: true
+    cooldown-ms: 12000
+    duration-ticks: 60
+    resistance-level: 3
+    activation-trigger: RIGHT_CLICK
+
+  COMBO_STRIKE:
+    enabled: true
+    cooldown-ms: 4000
+    damage: 2.5
+    radius: 3.5
+    hits: 5
+    hit-delay-ticks: 4
+
+  SONIC_CLAP:
+    enabled: true
+    cooldown-ms: 10000
+    damage: 4.0
+    radius: 7.0
+    knockback: 1.8
+
+  ATOMIC_PUNCH:
+    enabled: true
+    cooldown-ms: 10000
+    damage: 12.0
+    velocity: 2.5
+    charge-ticks: 8
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  REGENERATION:
+    enabled: true
+    cooldown-ms: 8000
+    duration-ticks: 100
+    regen-level: 1
+    activation-trigger: RIGHT_CLICK
+
+  TREMOR_SLAM:
+    enabled: true
+    cooldown-ms: 12000
+    damage: 6.0
+    radius: 6.0
+    knockback: 2.0
+
+  WARCRY:
+    enabled: true
+    cooldown-ms: 10000
+    radius: 10.0
+    knockback: 2.5
+    weakness-ticks: 80
+
+  BERSERKER_RAGE:
+    enabled: true
+    cooldown-ms: 12000
+    duration-ticks: 100
+    strength-level: 3
+    speed-level: 1
+    resistance-level: 1
+    heal: 4.0
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  VELOCITY_DIVE:
+    enabled: true
+    cooldown-ms: 14000
+    damage: 8.0
+    radius: 5.0
+    knockback: 2.5
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  SHOCKWAVE_LANDING:
+    enabled: true
+    cooldown-ms: 12000
+    damage: 5.0
+    radius: 5.0
+    knockback: 2.5
+
+  RELENTLESS:
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 80
+    resistance-level: 2
+    activation-trigger: RIGHT_CLICK
+
+  SUPERSONIC_STRIKE:
+    enabled: true
+    cooldown-ms: 10000
+    damage: 7.0
+    velocity: 5.0
+    strike-radius: 2.5
+    strike-ticks: 10
+
+  # ── OMNI-MAN ───────────────────────────────────────────────────────────────
+  ENDURANCE:
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 80
+    resistance-level: 2
+    activation-trigger: RIGHT_CLICK
+
+  TERROR_STRIKE:
+    enabled: true
+    cooldown-ms: 12000
+    damage: 6.0
+    radius: 5.0
+    weakness-ticks: 60
+
+  SPIN_DASH:
+    enabled: true
+    cooldown-ms: 7000
+    velocity: 2.5
+    speed-ticks: 30
+    speed-level: 2
+    activation-trigger: RIGHT_CLICK_SNEAK
+
+  INTIMIDATION_AURA:
+    enabled: true
+    cooldown-ms: 12000
+    radius: 7.0
+    duration-ticks: 160
+    tick-damage: 0.5
+    weakness-level: 1
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  CONQUEROR_STRIKE:
+    enabled: true
+    cooldown-ms: 8000
+    damage: 5.0
+    radius: 4.0
+    weakness-ticks: 60
+
+  RUTHLESS_ASSAULT:
+    enabled: true
+    cooldown-ms: 12000
+    damage: 5.0
+    radius: 8.0
+    slowness-ticks: 40
+
+  IMPERIAL_RAGE:
+    enabled: true
+    cooldown-ms: 15000
+    duration-ticks: 60
+    strength-level: 4
+    speed-level: 2
+    resistance-level: 1
+    backlash-damage: 4.0
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  GROUND_POUND:
+    enabled: true
+    cooldown-ms: 12000
+    damage: 7.0
+    radius: 5.0
+    knockback: 2.5
+
+  VILTRUMITE_CHARGE:
+    enabled: true
+    cooldown-ms: 10000
+    damage: 6.0
+    velocity: 5.5
+    strike-radius: 2.5
+    strike-ticks: 10
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  SUBJUGATION_GRIP:
+    enabled: true
+    cooldown-ms: 14000
+    damage: 5.0
+    target-radius: 4.0
+
+  SONIC_BOOM_PASS:
+    enabled: true
+    cooldown-ms: 10000
+    damage: 5.0
+    velocity: 5.5
+    strike-radius: 2.5
+    strike-ticks: 10
+
+  # ── ATOM EVE ───────────────────────────────────────────────────────────────
+  MATTER_RESHAPE:
+    enabled: true
+    cooldown-ms: 4000
+    range: 8
+
+  ENERGY_SHIELD:
+    enabled: true
+    cooldown-ms: 8000
+    duration-ticks: 80
+    resistance-level: 3
+    activation-trigger: RIGHT_CLICK
+
+  HEALING_TOUCH:
+    enabled: true
+    cooldown-ms: 10000
+    heal: 8.0
+    regen-ticks: 60
+    regen-level: 1
+    activation-trigger: RIGHT_CLICK
+
+  MATTER_BLAST:
+    enabled: true
+    cooldown-ms: 8000
+    damage: 5.0
+    range: 14.0
+
+  CONSTRUCT_ARMOR:
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 80
+    resistance-level: 2
+    activation-trigger: RIGHT_CLICK
+
+  TRANSMUTE_GROUND:
+    enabled: true
+    cooldown-ms: 6000
+    range: 8
+
+  ATOMIC_BURST:
+    enabled: true
+    cooldown-ms: 15000
+    damage: 10.0
+    radius: 10.0
+    knockback: 3.0
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  DIMENSIONAL_SHIFT:
+    enabled: true
+    cooldown-ms: 12000
+    duration-ticks: 40
+    resistance-level: 3
+    activation-trigger: RIGHT_CLICK_SNEAK
+
+  ATOMIC_CAGE:
+    enabled: true
+    cooldown-ms: 8000
+    radius: 5.0
+    duration-ticks: 60
+    slowness-level: 8
+    weakness-level: 2
+
+  PINK_BEAM:
+    enabled: true
+    cooldown-ms: 10000
+    damage: 6.0
+    range: 18.0
+
+  ATOMIC_FLIGHT:
+    enabled: true
+    cooldown-ms: 0
+
+  MATTER_WALL:
+    enabled: true
+    cooldown-ms: 8000
+    range: 8
+
+  # ── REX SPLODE ─────────────────────────────────────────────────────────────
+  EXPLOSIVE_CHARGE:
+    enabled: true
+    cooldown-ms: 10000
+    damage: 6.0
+    aoe-radius: 4.0
+    range: 20.0
+
+  KINETIC_INFUSE:
+    enabled: true
+    cooldown-ms: 12000
+    strength-ticks: 60
+    strength-level: 2
+
+  SPLODE_DASH:
+    enabled: true
+    cooldown-ms: 7000
+    velocity: 3.5
+    activation-trigger: RIGHT_CLICK_SNEAK
+
+  CHAIN_EXPLOSION:
+    enabled: true
+    cooldown-ms: 10000
+    damage: 5.0
+    aoe-radius: 3.5
+    explosion-count: 5
+
+  GRENADE_VOLLEY:
+    enabled: true
+    cooldown-ms: 12000
+    damage: 5.0
+    aoe-radius: 4.0
+
+  DETONATION_FIELD:
+    enabled: true
+    cooldown-ms: 12000
+    radius: 4.5
+    duration-ticks: 80
+    tick-damage: 1.5
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  IMPACT_WAVE:
+    enabled: true
+    cooldown-ms: 12000
+    damage: 3.0
+    range: 10.0
+    knockback: 2.0
+
+  REX_BURST:
+    enabled: true
+    cooldown-ms: 15000
+    damage: 12.0
+    radius: 12.0
+    knockback: 3.5
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  PROXIMITY_MINE:
+    enabled: true
+    cooldown-ms: 14000
+    damage: 8.0
+    trigger-radius: 2.5
+    aoe-radius: 4.0
+    duration-ticks: 300
+
+  KINETIC_SHIELD:
+    enabled: true
+    cooldown-ms: 14000
+    duration-ticks: 100
+    resistance-level: 3
+
+  CLUSTER_BLAST:
+    enabled: true
+    cooldown-ms: 14000
+    damage: 8.0
+    aoe-radius: 5.0
+
+  CHARGE_SPRINT:
+    enabled: true
+    cooldown-ms: 6000
+    velocity: 4.0
+    activation-trigger: RIGHT_CLICK_SNEAK
+
+  # ── ROBOT ──────────────────────────────────────────────────────────────────
+  DRONE_SWARM:
+    enabled: true
+    cooldown-ms: 10000
+    radius: 7.0
+    tick-damage: 1.0
+    duration-ticks: 60
+
+  FORCE_FIELD:
+    enabled: true
+    cooldown-ms: 8000
+    duration-ticks: 80
+    resistance-level: 3
+    activation-trigger: RIGHT_CLICK
+
+  LASER_ARRAY:
+    enabled: true
+    cooldown-ms: 10000
+    damage: 8.0
+    range: 20.0
+    blindness-ticks: 40
+
+  NANITE_REPAIR:
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 100
+    regen-level: 1
+    activation-trigger: RIGHT_CLICK
+
+  EMP_PULSE:
+    enabled: true
+    cooldown-ms: 10000
+    radius: 10.0
+    slowness-ticks: 80
+    weakness-ticks: 80
+
+  TACTICAL_SCAN:
+    enabled: true
+    cooldown-ms: 6000
+    radius: 20.0
+
+  MECH_OVERLOAD:
+    enabled: true
+    cooldown-ms: 12000
+    duration-ticks: 60
+    strength-level: 4
+    speed-level: 2
+    backlash-damage: 4.0
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  ELECTROMAGNETIC_FIELD:
+    enabled: true
+    cooldown-ms: 10000
+    radius: 5.0
+    duration-ticks: 100
+    tick-damage: 1.5
+    slowness-level: 2
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  ROCKET_BARRAGE:
+    enabled: true
+    cooldown-ms: 14000
+    radius: 7.0
+    tick-damage: 1.0
+    duration-ticks: 60
+
+  GRAVITIC_SLAM:
+    enabled: true
+    cooldown-ms: 14000
+    damage: 6.0
+    radius: 7.0
+    slowness-ticks: 40
+    slowness-level: 2
+
+  SYSTEM_BOOST:
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 80
+    strength-level: 2
+    speed-level: 1
+    resistance-level: 1
+    activation-trigger: RIGHT_CLICK
+
+  # ── DUPLI-KATE ─────────────────────────────────────────────────────────────
+  DUPLICATE_SELF:
+    enabled: true
+    cooldown-ms: 8000
+    clone-count: 3
+
+  SWARM_STRIKE:
+    enabled: true
+    cooldown-ms: 6000
+    damage: 5.0
+    radius: 7.0
+
+  CLONE_SHIELD:
+    enabled: true
+    cooldown-ms: 12000
+    duration-ticks: 100
+    resistance-level: 3
+
+  MASS_ASSAULT:
+    enabled: true
+    cooldown-ms: 14000
+    damage: 6.0
+    radius: 10.0
+    slowness-ticks: 40
+
+  DIVERSION_CLONE:
+    enabled: true
+    cooldown-ms: 8000
+    range: 10.0
+    activation-trigger: RIGHT_CLICK_SNEAK
+
+  PINCER_ATTACK:
+    enabled: true
+    cooldown-ms: 10000
+    damage: 6.0
+    radius: 8.0
+
+  CLONE_SURGE:
+    enabled: true
+    cooldown-ms: 8000
+    range: 10.0
+    activation-trigger: RIGHT_CLICK_SNEAK
+
+  DUPLICATE_BURST:
+    enabled: true
+    cooldown-ms: 15000
+    damage: 12.0
+    radius: 12.0
+    knockback: 3.5
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  CLONE_AMBUSH:
+    enabled: true
+    cooldown-ms: 12000
+    damage: 6.0
+    radius: 8.0
+
+  INFINITE_COPIES:
+    enabled: true
+    cooldown-ms: 10000
+    clone-count: 3
+
+  COPY_FADE:
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 100
+    speed-level: 1
+
+  BODY_DOUBLE:
+    enabled: true
+    cooldown-ms: 14000
+    duration-ticks: 100
+    resistance-level: 3
+    activation-trigger: RIGHT_CLICK
+
+  # ── MONSTER GIRL ───────────────────────────────────────────────────────────
+  MONSTER_TRANSFORM:
+    enabled: true
+    cooldown-ms: 12000
+    duration-ticks: 160
+    strength-level: 3
+    resistance-level: 2
+    regen-level: 1
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  RAMPAGE:
+    enabled: true
+    cooldown-ms: 12000
+    duration-ticks: 80
+    damage: 3.0
+    radius: 5.0
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  REGENERATE:
+    enabled: true
+    cooldown-ms: 14000
+    duration-ticks: 100
+    regen-level: 1
+    activation-trigger: RIGHT_CLICK
+
+  TREMOR_SLAM_MG:
+    enabled: true
+    cooldown-ms: 10000
+    damage: 7.0
+    radius: 7.0
+    knockback: 2.0
+
+  MONSTER_ROAR:
+    enabled: true
+    cooldown-ms: 14000
+    radius: 10.0
+    knockback: 2.5
+    weakness-ticks: 80
+
+  TAIL_SWEEP:
+    enabled: true
+    cooldown-ms: 8000
+    damage: 4.0
+    radius: 6.0
+    knockback: 1.5
+
+  THICK_HIDE:
+    enabled: true
+    cooldown-ms: 8000
+    duration-ticks: 100
+    resistance-level: 2
+    activation-trigger: RIGHT_CLICK
+
+  FERAL_CHARGE:
+    enabled: true
+    cooldown-ms: 8000
+    velocity: 3.0
+    speed-ticks: 30
+    speed-level: 2
+
+  MONSTER_LEAP:
+    enabled: true
+    cooldown-ms: 8000
+    velocity: 4.0
+    target-radius: 20.0
+
+  CRUSHING_GRIP:
+    enabled: true
+    cooldown-ms: 12000
+    damage: 6.0
+    target-radius: 4.0
+
+  EARTH_SHATTER:
+    enabled: true
+    cooldown-ms: 14000
+    damage: 8.0
+    radius: 8.0
+    knockback: 2.0
+
+  BERSERK_ROAR:
+    enabled: true
+    cooldown-ms: 10000
+    radius: 10.0
+    knockback: 2.5
+    weakness-ticks: 80
+
+  # ── BLACK SAMSON ───────────────────────────────────────────────────────────
+  ENERGY_DISCHARGE:
+    enabled: true
+    cooldown-ms: 10000
+    damage: 6.0
+    radius: 5.0
+    fire-ticks: 60
+
+  SAMSON_CHARGE:
+    enabled: true
+    cooldown-ms: 8000
+    damage: 8.0
+    radius: 5.0
+    strength-level: 3
+    delay-ticks: 20
+
+  POWER_SLAM:
+    enabled: true
+    cooldown-ms: 10000
+    damage: 7.0
+    radius: 6.0
+    knockback: 2.0
+
+  LIGHTNING_STRIKE:
+    enabled: true
+    cooldown-ms: 12000
+    damage: 8.0
+    radius: 5.0
+    fire-ticks: 60
+
+  ENERGY_BURST:
+    enabled: true
+    cooldown-ms: 12000
+    damage: 11.0
+    radius: 10.0
+    knockback: 3.0
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  OVERCHARGE:
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 80
+    strength-level: 3
+    speed-level: 1
+    regen-level: 1
+    activation-trigger: RIGHT_CLICK
+
+  ENERGY_LANCE:
+    enabled: true
+    cooldown-ms: 8000
+    damage: 8.0
+    range: 20.0
+    blindness-ticks: 40
+
+  CHAIN_LIGHTNING:
+    enabled: true
+    cooldown-ms: 12000
+    damage: 6.0
+    radius: 5.0
+    fire-ticks: 60
+
+  POWER_ARMOR:
+    enabled: true
+    cooldown-ms: 8000
+    duration-ticks: 100
+    resistance-level: 2
+
+  ENERGY_VORTEX:
+    enabled: true
+    cooldown-ms: 10000
+    radius: 5.0
+    duration-ticks: 100
+    tick-damage: 1.5
+    slowness-level: 2
+
+  BATTLE_HARNESS:
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 100
+    strength-level: 3
+    speed-level: 1
+    resistance-level: 1
+
+  # ── BULLETPROOF ────────────────────────────────────────────────────────────
+  ELECTRIC_DASH:
+    enabled: true
+    cooldown-ms: 8000
+    velocity: 5.0
+    radius: 2.5
+    damage: 6.0
+    slowness-ticks: 40
+    activation-trigger: RIGHT_CLICK_SNEAK
+
+  BULLET_IMMUNITY:
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 100
+    resistance-level: 3
+
+  DEFLECT:
+    enabled: true
+    cooldown-ms: 8000
+    duration-ticks: 40
+    resistance-level: 3
+    activation-trigger: RIGHT_CLICK
+
+  COUNTER_STRIKE:
+    enabled: true
+    cooldown-ms: 8000
+    duration-ticks: 40
+    resistance-level: 3
+
+  STEEL_SKIN:
+    enabled: true
+    cooldown-ms: 14000
+    duration-ticks: 100
+    resistance-level: 2
+    activation-trigger: RIGHT_CLICK
+
+  FORCE_RETURN:
+    enabled: true
+    cooldown-ms: 12000
+    damage: 8.0
+    target-radius: 5.0
+
+  IMPACT_ABSORB:
+    enabled: true
+    cooldown-ms: 14000
+    duration-ticks: 80
+    resistance-level: 3
+    regen-level: 1
+    activation-trigger: RIGHT_CLICK
+
+  ARMOR_SURGE:
+    enabled: true
+    cooldown-ms: 8000
+    duration-ticks: 100
+    resistance-level: 3
+    activation-trigger: RIGHT_CLICK
+
+  RICOCHET:
+    enabled: true
+    cooldown-ms: 10000
+    damage: 6.0
+    radius: 6.0
+    knockback: 2.5
+
+  IRON_RUSH:
+    enabled: true
+    cooldown-ms: 12000
+    damage: 6.0
+    velocity: 4.5
+    strike-radius: 2.5
+    strike-ticks: 10
+
+  SKIN_FORTRESS:
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 100
+    resistance-level: 3
+    activation-trigger: RIGHT_CLICK
+
+  REACTIVE_SHELL:
+    enabled: true
+    cooldown-ms: 8000
+    duration-ticks: 100
+    resistance-level: 3
+    activation-trigger: RIGHT_CLICK
+
+  CONCUSSIVE_RETURN:
+    enabled: true
+    cooldown-ms: 12000
+    damage: 8.0
+    target-radius: 5.0
+
+  IRON_DENSITY:
+    enabled: true
+    cooldown-ms: 8000
+    duration-ticks: 100
+    resistance-level: 3
+    slowness-level: 2
+
+  KINETIC_FEEDBACK:
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 100
+    damage-reduction: 0.5
+    release-radius: 8.0
+    activation-trigger: RIGHT_CLICK
+
+  TITANIUM_RUSH:
+    enabled: true
+    cooldown-ms: 10000
+    damage: 10.0
+    velocity: 6.0
+    hit-radius: 2.0
+
+  DENSITY_SLAM:
+    enabled: true
+    cooldown-ms: 10000
+    damage: 10.0
+    radius: 8.0
+    knockback: 3.5
+    velocity: -3.0
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  KINETIC_RELEASE:
+    enabled: true
+    cooldown-ms: 10000
+    damage: 8.0
+    radius: 6.0
+    knockback: 3.0
+
+  SHOCKWAVE_FIST:
+    enabled: true
+    cooldown-ms: 14000
+    damage: 8.0
+    range: 14.0
+    knockback: 3.0
+
+  IMPENETRABLE:
+    enabled: true
+    cooldown-ms: 15000
+    duration-ticks: 60
+    resistance-level: 255
+    activation-trigger: RIGHT_CLICK
+
+  BULLET_CATCH:
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 80
+    return-multiplier: 2
+    activation-trigger: RIGHT_CLICK
+
+  MOMENTUM_TRANSFER:
+    enabled: true
+    cooldown-ms: 10000
+    damage: 8.0
+    target-radius: 5.0
+
+  UNSTOPPABLE:
+    enabled: true
+    cooldown-ms: 8000
+    damage: 6.0
+    velocity: 5.0
+    strike-radius: 2.5
+    strike-ticks: 8
+
+  STELLAR_SLAM:
+    enabled: true
+    cooldown-ms: 12000
+    damage: 11.0
+    radius: 10.0
+    knockback: 4.0
+    velocity: -4.0
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  INTERSTELLAR_DASH:
+    enabled: true
+    cooldown-ms: 10000
+    damage: 8.0
+    velocity: 20.0
+    radius: 4.0
+    activation-trigger: RIGHT_CLICK_SNEAK
+
+  COSMIC_ROAR:
+    enabled: true
+    cooldown-ms: 8000
+    radius: 10.0
+    duration-ticks: 40
+    slowness-level: 4
+    weakness-level: 2
+
+  REGENERATIVE_SURGE:
+    enabled: true
+    cooldown-ms: 14000
+    heal-percent: 50.0
+    min-heal: 8.0
+    regen-ticks: 60
+    regen-level: 2
+
+  # ── ALLEN THE ALIEN ────────────────────────────────────────────────────────
+  RAPID_ADAPT:
+    enabled: true
+    cooldown-ms: 14000
+    duration-ticks: 80
+    resistance-level: 2
+    activation-trigger: RIGHT_CLICK
+
+  ADAPTATION_SHIELD:
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 100
+    resistance-level: 3
+
+  COSMIC_PUNCH:
+    enabled: true
+    cooldown-ms: 10000
+    damage: 12.0
+    velocity: 3.0
+    charge-ticks: 8
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  GALACTIC_BURST:
+    enabled: true
+    cooldown-ms: 15000
+    damage: 12.0
+    radius: 12.0
+    knockback: 3.0
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  ALIEN_RESILIENCE:
+    enabled: true
+    cooldown-ms: 8000
+    duration-ticks: 80
+    resistance-level: 2
+    regen-level: 1
+    activation-trigger: RIGHT_CLICK
+
+  ORBIT_DASH:
+    enabled: true
+    cooldown-ms: 5000
+    velocity: 4.0
+    activation-trigger: RIGHT_CLICK_SNEAK
+
+  PAIN_THRESHOLD:
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 80
+    resistance-level: 2
+    activation-trigger: RIGHT_CLICK
+
+  ALIEN_OVERDRIVE:
+    enabled: true
+    cooldown-ms: 12000
+    damage: 12.0
+    radius: 12.0
+    knockback: 4.0
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  WAR_CRY:
+    enabled: true
+    cooldown-ms: 10000
+    radius: 10.0
+    knockback: 2.5
+    weakness-ticks: 80
+
+  SAVAGE_STRIKE:
+    enabled: true
+    cooldown-ms: 10000
+    damage: 7.0
+    radius: 5.0
+    weakness-ticks: 60
+
+  # ── BATTLE BEAST ───────────────────────────────────────────────────────────
+  UNYIELDING:
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 80
+    resistance-level: 2
+    activation-trigger: RIGHT_CLICK
+
+  MANE_SHIELD:
+    enabled: true
+    cooldown-ms: 8000
+    duration-ticks: 80
+    resistance-level: 3
+    activation-trigger: RIGHT_CLICK
+
+  PREDATOR_LEAP:
+    enabled: true
+    cooldown-ms: 8000
+    velocity: 3.0
+    target-radius: 18.0
+
+  WARRIOR_BLOOD:
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 80
+    strength-level: 2
+    speed-level: 1
+    resistance-level: 1
+    heal: 4.0
+    activation-trigger: RIGHT_CLICK
+
+  BATTLE_ROAR:
+    enabled: true
+    cooldown-ms: 10000
+    radius: 10.0
+    knockback: 2.5
+    weakness-ticks: 80
+
+  PRIMAL_FRENZY:
+    enabled: true
+    cooldown-ms: 12000
+    duration-ticks: 60
+    strength-level: 4
+    speed-level: 2
+    resistance-level: 1
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  DEATH_CHARGE:
+    enabled: true
+    cooldown-ms: 9000
+    velocity: 3.0
+    target-radius: 18.0
+
+  BONE_CRUSH:
+    enabled: true
+    cooldown-ms: 10000
+    damage: 6.0
+    target-radius: 4.0
+
+  BEAST_ENDURANCE:
+    enabled: true
+    cooldown-ms: 8000
+    duration-ticks: 80
+    resistance-level: 2
+    activation-trigger: RIGHT_CLICK
+
+  KILLING_BLOW:
+    enabled: true
+    cooldown-ms: 10000
+    damage: 10.0
+    radius: 4.5
+    execute-threshold-percent: 30
+
+  IRON_WILL:
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 80
+    resistance-level: 3
+    activation-trigger: RIGHT_CLICK
+
+  # ── CONQUEST ───────────────────────────────────────────────────────────────
+  BATTLE_HARDENED:
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 80
+    resistance-level: 2
+    activation-trigger: RIGHT_CLICK
+
+  SCAR_POWER:
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 80
+    strength-level: 3
+
+  CONQUEST_RAGE:
+    enabled: true
+    cooldown-ms: 15000
+    duration-ticks: 60
+    strength-level: 5
+    speed-level: 2
+    resistance-level: 1
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  CONQUEROR_CHARGE:
+    enabled: true
+    cooldown-ms: 10000
+    damage: 6.0
+    velocity: 5.5
+    strike-radius: 2.5
+    strike-ticks: 10
+
+  BLADE_SPIN:
+    enabled: true
+    cooldown-ms: 10000
+    damage: 4.0
+    radius: 5.0
+
+  DEVASTATION:
+    enabled: true
+    cooldown-ms: 15000
+    damage: 12.0
+    radius: 10.0
+    knockback: 3.0
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  OPPRESSOR_GRIP:
+    enabled: true
+    cooldown-ms: 12000
+    damage: 5.0
+    target-radius: 4.0
+
+  # ── THRAGG ─────────────────────────────────────────────────────────────────
+  VILTRUMITE_ENDURANCE:
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 80
+    resistance-level: 2
+    activation-trigger: RIGHT_CLICK
+
+  JUGULAR_STRIKE:
+    enabled: true
+    cooldown-ms: 12000
+    damage: 7.0
+    radius: 4.0
+    execute-threshold-percent: 30
+
+  GRAND_REGENT_AURA:
+    enabled: true
+    cooldown-ms: 12000
+    radius: 8.0
+    duration-ticks: 160
+    tick-damage: 0.8
+    weakness-level: 2
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  VILTRUMITE_MASTERY:
+    enabled: true
+    cooldown-ms: 15000
+    damage: 12.0
+    radius: 12.0
+    knockback: 3.5
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  SUPREME_AUTHORITY:
+    enabled: true
+    cooldown-ms: 12000
+    radius: 10.0
+    duration-ticks: 40
+    slowness-level: 10
+    weakness-level: 4
+    knockback: 2.5
+
+  LETHAL_DESCENT:
+    enabled: true
+    cooldown-ms: 12000
+    damage: 8.0
+    radius: 5.0
+    knockback: 2.5
+
+  IRON_DYNASTY:
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 80
+    resistance-level: 2
+    activation-trigger: RIGHT_CLICK
+
+  CULLING_STRIKE:
+    enabled: true
+    cooldown-ms: 10000
+    damage: 10.0
+    radius: 4.5
+    execute-threshold-percent: 30
+
+  SOVEREIGN_SLAM:
+    enabled: true
+    cooldown-ms: 14000
+    damage: 8.0
+    radius: 7.0
+    knockback: 2.5
+
+  WARLORD_WRATH:
+    enabled: true
+    cooldown-ms: 15000
+    damage: 12.0
+    radius: 12.0
+    knockback: 3.5
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  EDICT:
+    enabled: true
+    cooldown-ms: 12000
+    radius: 10.0
+    duration-ticks: 40
+    slowness-level: 10
+    weakness-level: 4
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  VACUUM_PUNCH:
+    enabled: true
+    cooldown-ms: 12000
+    damage: 14.0
+    radius: 12.0
+    duration-ticks: 40
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  # ── ANGSTROM LEVY ──────────────────────────────────────────────────────────
+  DIMENSION_PORTAL:
+    enabled: true
+    cooldown-ms: 6000
+    range: 30.0
+    activation-trigger: RIGHT_CLICK_SNEAK
+
+  MULTIVERSE_DRAIN:
+    enabled: true
+    cooldown-ms: 14000
+    radius: 8.0
+    steal-percent: 20
+    max-steal: 5.0
+    strength-ticks: 80
+
+  KNOWLEDGE_SURGE:
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 80
+    resistance-level: 2
+
+  PORTAL_TRAP:
+    enabled: true
+    cooldown-ms: 8000
+    trigger-radius: 2.5
+    teleport-height: 10.0
+    duration-ticks: 200
+
+  INTELLECT_BLAST:
+    enabled: true
+    cooldown-ms: 8000
+    damage: 8.0
+    range: 14.0
+
+  CROSS_DIMENSION:
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 80
+    strength-level: 3
+
+  REALITY_TEAR:
+    enabled: true
+    cooldown-ms: 15000
+    damage: 13.0
+    radius: 16.0
+    knockback: 4.5
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  MULTIVERSE_STEP:
+    enabled: true
+    cooldown-ms: 5000
+    velocity: 4.0
+    activation-trigger: RIGHT_CLICK_SNEAK
+
+  PARALLEL_STRIKE:
+    enabled: true
+    cooldown-ms: 10000
+    damage: 6.0
+    radius: 7.0
+
+  DIMENSIONAL_ANCHOR:
+    enabled: true
+    cooldown-ms: 8000
+    radius: 6.0
+    duration-ticks: 60
+    slowness-level: 8
+    weakness-level: 2
+
+  RIFT_SHIELD:
+    enabled: true
+    cooldown-ms: 8000
+    duration-ticks: 80
+    resistance-level: 2
+    damage-reduction: 0.85
+    activation-trigger: RIGHT_CLICK
+
+  VOID_PULL:
+    enabled: true
+    cooldown-ms: 14000
+    radius: 10.0
+    knockback: 2.5
+
+  # ── SHRINKING RAY ──────────────────────────────────────────────────────────
+  MINIATURIZE:
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 80
+    speed-level: 3
+
+  MICRO_STRIKE:
+    enabled: true
+    cooldown-ms: 12000
+    damage: 8.0
+    radius: 4.0
+    poison-ticks: 60
+
+  SIZE_SHIFT:
+    enabled: true
+    cooldown-ms: 8000
+    duration-ticks: 80
+    speed-level: 1
+
+  INTERNAL_ATTACK:
+    enabled: true
+    cooldown-ms: 14000
+    damage: 9.0
+    radius: 4.0
+    poison-ticks: 60
+
+  SHRINK_DASH:
+    enabled: true
+    cooldown-ms: 5000
+    velocity: 4.0
+    activation-trigger: RIGHT_CLICK_SNEAK
+
+  GIANT_FORM:
+    enabled: true
+    cooldown-ms: 12000
+    duration-ticks: 100
+    strength-level: 4
+    resistance-level: 2
+    slowness-level: 1
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  SIZE_WAVE:
+    enabled: true
+    cooldown-ms: 8000
+    radius: 10.0
+    slowness-ticks: 60
+    slowness-level: 2
+    weakness-ticks: 60
+
+  MICRO_BURST:
+    enabled: true
+    cooldown-ms: 15000
+    damage: 12.0
+    radius: 12.0
+    knockback: 3.5
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  SHRINK_BOMB:
+    enabled: true
+    cooldown-ms: 14000
+    radius: 6.0
+    duration-ticks: 60
+    slowness-level: 8
+    weakness-level: 2
+
+  GIANT_STOMP:
+    enabled: true
+    cooldown-ms: 12000
+    damage: 8.0
+    radius: 7.0
+    knockback: 2.0
+
+  PHASE_DODGE:
+    enabled: true
+    cooldown-ms: 14000
+    duration-ticks: 80
+    resistance-level: 3
+    regen-level: 1
+
+  TITAN_SLAM:
+    enabled: true
+    cooldown-ms: 12000
+    damage: 11.0
+    radius: 10.0
+    knockback: 3.0
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  # ── CECILIA STEDMAN ────────────────────────────────────────────────────────
+  TACTICAL_COMMAND:
+    enabled: true
+    cooldown-ms: 14000
+    radius: 15.0
+    duration-ticks: 80
+    strength-level: 1
+
+  SHIELD_DEPLOY:
+    enabled: true
+    cooldown-ms: 14000
+    radius: 8.0
+    duration-ticks: 80
+    resistance-level: 2
+
+  WEAPON_MASTERY:
+    enabled: true
+    cooldown-ms: 8000
+    duration-ticks: 60
+    strength-level: 2
+    haste-level: 1
+
+  STRATEGIC_STRIKE:
+    enabled: true
+    cooldown-ms: 14000
+    damage: 8.0
+    radius: 5.0
+    weakness-ticks: 80
+    slowness-ticks: 80
+
+  COORDINATED_ASSAULT:
+    enabled: true
+    cooldown-ms: 14000
+    damage: 6.0
+    radius: 10.0
+    slowness-ticks: 40
+
+  FIELD_MEDIC:
+    enabled: true
+    cooldown-ms: 14000
+    heal: 8.0
+    regen-ticks: 60
+    regen-level: 1
+    activation-trigger: RIGHT_CLICK
+
+  INTEL_SCAN:
+    enabled: true
+    cooldown-ms: 6000
+    radius: 20.0
+
+  GOVERNMENT_BACKUP:
+    enabled: true
+    cooldown-ms: 12000
+    duration-ticks: 80
+    strength-level: 3
+    speed-level: 1
+    resistance-level: 1
+    activation-trigger: RIGHT_CLICK
+
+  TACTICAL_RETREAT:
+    enabled: true
+    cooldown-ms: 8000
+    velocity: 4.0
+    speed-ticks: 40
+    speed-level: 2
+    activation-trigger: RIGHT_CLICK_SNEAK
+
+  SUPPRESSION_FIRE:
+    enabled: true
+    cooldown-ms: 14000
+    radius: 10.0
+    slowness-ticks: 80
+    weakness-ticks: 80
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  COUNTER_INTEL:
+    enabled: true
+    cooldown-ms: 8000
+    duration-ticks: 80
+    resistance-level: 3
+    regen-level: 1
+
+  ASSET_EXTRACTION:
+    enabled: true
+    cooldown-ms: 10000
+    range: 30.0
+    activation-trigger: RIGHT_CLICK_SNEAK
+
+  GDA_AIRSTRIKE:
+    enabled: true
+    cooldown-ms: 12000
+    damage: 10.0
+    aoe-radius: 7.0
+    explosion-power: 4.0
+    delay-ticks: 40
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  DRONE_BARRAGE:
+    enabled: true
+    cooldown-ms: 8000
+    damage: 7.0
+    target-count: 3
+    target-range: 20.0
+
+  FREEZE_ASSETS:
+    enabled: true
+    cooldown-ms: 10000
+    target-radius: 15.0
+    duration-ticks: 80
+    slowness-level: 8
+
+  RED_TAPE:
+    enabled: true
+    cooldown-ms: 14000
+    radius: 10.0
+    duration-ticks: 80
+    slowness-level: 5
+    weakness-level: 3
+
+  NANITE_INJECTION:
+    enabled: true
+    cooldown-ms: 8000
+    duration-ticks: 100
+    regen-level: 2
+    absorption-level: 1
+    activation-trigger: RIGHT_CLICK
+
+  LOCKDOWN:
+    enabled: true
+    cooldown-ms: 12000
+    radius: 12.0
+    duration-ticks: 80
+    slowness-level: 4
+    weakness-level: 2
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  FIELD_COMMANDER:
+    enabled: true
+    cooldown-ms: 15000
+    radius: 15.0
+    duration-ticks: 80
+    strength-level: 1
+    speed-level: 1
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  BLACK_SITE:
+    enabled: true
+    cooldown-ms: 12000
+    target-radius: 15.0
+    teleport-height: 15.0
+    activation-trigger: RIGHT_CLICK_SNEAK
+
+  CLASSIFIED:
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 40
+    resistance-level: 3
+
+  AUTHORITY_OVERRIDE:
+    enabled: true
+    cooldown-ms: 10000
+    damage: 5.0
+    radius: 10.0
+    duration-ticks: 60
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  # ── IMMORTAL ───────────────────────────────────────────────────────────────
+  ANCIENT_FURY:
+    enabled: true
+    cooldown-ms: 15000
+    damage: 10.0
+    radius: 9.0
+    knockback: 3.0
+    strength-ticks: 60
+    strength-level: 2
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  TIME_HARDENED:
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 80
+    resistance-level: 3
+    activation-trigger: RIGHT_CLICK
+
+  RESURRECTION_SURGE:
+    enabled: true
+    cooldown-ms: 15000
+    heal-percent: 50.0
+    min-heal: 8.0
+    regen-ticks: 80
+    regen-level: 2
+    activation-trigger: RIGHT_CLICK
+
+  TIMELESS_STRIKE:
+    enabled: true
+    cooldown-ms: 14000
+    damage: 10.0
+    radius: 4.5
+    execute-threshold-percent: 30
+
+  UNDYING_WILL:
+    enabled: true
+    cooldown-ms: 12000
+    duration-ticks: 60
+    resistance-level: 4
+    regen-level: 2
+    activation-trigger: RIGHT_CLICK
+
+  ANCIENT_LEAP:
+    enabled: true
+    cooldown-ms: 8000
+    velocity: 3.0
+    target-radius: 18.0
+
+  # ── DARKWING ───────────────────────────────────────────────────────────────
+  GRAPPLE_LINE:
+    enabled: true
+    cooldown-ms: 5000
+    velocity: 4.0
+    target-radius: 18.0
+
+  SMOKE_BOMB:
+    enabled: true
+    cooldown-ms: 14000
+    duration-ticks: 60
+    radius: 6.0
+    blindness-ticks: 40
+    slowness-ticks: 40
+
+  WING_STRIKE:
+    enabled: true
+    cooldown-ms: 10000
+    damage: 6.0
+    target-radius: 5.0
+
+  BATARANG_VOLLEY:
+    enabled: true
+    cooldown-ms: 8000
+    damage: 5.0
+    range: 16.0
+    spread-count: 5
+    slowness-ticks: 40
+
+  DARK_SILENCE:
+    enabled: true
+    cooldown-ms: 12000
+    damage: 11.0
+    range: 12.0
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  CAPE_GLIDE:
+    enabled: true
+    cooldown-ms: 5000
+    velocity: 4.0
+    speed-ticks: 40
+    speed-level: 2
+    activation-trigger: RIGHT_CLICK_SNEAK
+
+  STEALTH_MODE:
+    enabled: true
+    cooldown-ms: 14000
+    duration-ticks: 80
+    speed-level: 1
+
+  # ── OLIVER GRAYSON ─────────────────────────────────────────────────────────
+  BLUE_FLAME:
+    enabled: true
+    cooldown-ms: 8000
+    damage: 7.0
+    range: 14.0
+    fire-ticks: 80
+    weakness-ticks: 60
+
+  HALF_BREED_SURGE:
+    enabled: true
+    cooldown-ms: 15000
+    duration-ticks: 80
+    strength-level: 4
+    speed-level: 2
+    resistance-level: 2
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  HEAT_VISION:
+    enabled: true
+    cooldown-ms: 8000
+    damage: 8.0
+    range: 20.0
+    fire-ticks: 80
+
+  SUPER_BREATH:
+    enabled: true
+    cooldown-ms: 14000
+    radius: 10.0
+    knockback: 3.5
+    slowness-ticks: 80
+    slowness-level: 3
+
+  TECH_JACKET_BOOST:
+    enabled: true
+    cooldown-ms: 8000
+    velocity: 5.0
+
+  FULL_POWER:
+    enabled: true
+    cooldown-ms: 15000
+    damage: 13.0
+    radius: 12.0
+    knockback: 4.0
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  # ── UNIVERSAL ──────────────────────────────────────────────────────────────
+  GRAPPLE:
+    enabled: true
+    cooldown-ms: 6000
+    damage: 6.0
+    range: 5.0
+    velocity: 1.8
+    duration-ticks: 40
+    activation-trigger: LEFT_CLICK
+
+  REGENT_CHARGE:
+    enabled: true
+    cooldown-ms: 10000
+    damage: 7.0
+    velocity: 5.5
+    strike-radius: 2.5
+    strike-ticks: 10
