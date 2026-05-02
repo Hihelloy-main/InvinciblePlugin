@@ -91,7 +91,7 @@ public class AbilityManager {
         if (event.isCancelled()) return false;
 
         AbilityExecutor.execute(player, ability, plugin, event.getDamage(), event.getDuration(), event.getRadius());
-        setCooldown(player, ability, event.getCooldown());
+        setCooldown(player, ability, event.getCooldownMs());
         return true;
     }
 
@@ -206,17 +206,17 @@ public class AbilityManager {
         for (int i = 0; i < validated.length; i++) {
             if (validated[i] == null) continue;
             boolean valid = false;
-
+            // Check character abilities
             if (character != null) {
                 for (String key : character.getAbilityKeys()) {
                     if (key.equalsIgnoreCase(validated[i].name())) { valid = true; break; }
                 }
             }
-
+            // Check cosmetic abilities
             if (!valid && cosmeticKeys.contains(validated[i].name())) {
                 valid = true;
             }
-            if (!valid) validated[i] = null;
+            if (!valid) validated[i] = null; // ability no longer accessible
         }
 
         boundAbilities.put(player.getUniqueId(), validated);

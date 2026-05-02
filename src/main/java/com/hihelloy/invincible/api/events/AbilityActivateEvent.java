@@ -19,7 +19,7 @@ public class AbilityActivateEvent extends PlayerEvent implements Cancellable {
     private double damage;
     private int duration;
     private double radius;
-    private long cooldown;
+    private int cooldown;
 
     public AbilityActivateEvent(Player player, AbilityType ability,
                                 CharacterType character, int slot) {
@@ -30,7 +30,7 @@ public class AbilityActivateEvent extends PlayerEvent implements Cancellable {
         this.damage = 0.0;
         this.duration = 0;
         this.radius = 0.0;
-        this.cooldown = ability.getCooldownMs();
+        this.cooldown = (int) ability.getCooldownMs();
     }
 
     public AbilityType getAbility() { return ability; }
@@ -46,8 +46,8 @@ public class AbilityActivateEvent extends PlayerEvent implements Cancellable {
     public double getRadius() { return radius; }
     public void setRadius(double r) { this.radius = r; }
 
-    public long getCooldown() { return cooldown; }
-    public void setCooldown(int c) { this.cooldown = Math.max(0, c); }
+    public int getCooldownMs() { return cooldown; }
+    public void setCooldownMs(int c) { this.cooldown = Math.max(0, c); }
 
     @Override public boolean isCancelled() { return cancelled; }
     @Override public void setCancelled(boolean c) { this.cancelled = c; }

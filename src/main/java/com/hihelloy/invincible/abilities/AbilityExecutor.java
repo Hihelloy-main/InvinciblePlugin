@@ -17,6 +17,11 @@ import org.bukkit.entity.Player;
 public class AbilityExecutor {
 
     public static void execute(Player player, AbilityType ability, InvinciblePlugin plugin) {
+        execute(player, ability, plugin, 0.0, 0, 0.0);
+    }
+
+    public static void execute(Player player, AbilityType ability, InvinciblePlugin plugin,
+                               double bonusDamage, int bonusDuration, double bonusRadius) {
         double dmg = plugin.getStatManager().getDamageFlatBonus(player);
         double dur = plugin.getStatManager().getDurationMultiplier(player);
         double spd = plugin.getStatManager().getSpeedMultiplier(player);
