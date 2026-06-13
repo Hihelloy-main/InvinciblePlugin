@@ -150,6 +150,33 @@ public class AbilityManager {
         return true;
     }
 
+    private void setRawCooldown(Player player, AbilityType ability, String configKey, long cdMs) {
+        if (cdMs <= 0) return;
+        configCooldowns
+                .computeIfAbsent(player.getUniqueId(), k -> new HashMap<>())
+                .put(configKey.toUpperCase(), System.currentTimeMillis() + cdMs);
+    }
+
+    public boolean isConfigAbilityOnCooldown(Player player, String configKey) {
+        Map<String, Long> map = configCooldowns.get(player.getUniqueId());
+        if (map == null) return false;
+        Long exp = map.get(configKey.toUpperCase());
+        if (exp == null) return false;
+        if (System.currentTimeMillis() >= exp) {
+            map.remove(configKey.toUpperCase());
+            return false;
+        }
+        return true;
+    }
+
+    public long getConfigAbilityRemainingCooldown(Player player, String configKey) {
+        Map<String, Long> map = configCooldowns.get(player.getUniqueId());
+        if (map == null) return 0;
+        Long exp = map.get(configKey.toUpperCase());
+        return exp == null ? 0 : Math.max(0, exp - System.currentTimeMillis());
+    }
+
+
     public boolean isOnCooldown(Player player, AbilityType ability) {
         Map<AbilityType, Long> ends = cooldownEnds.get(player.getUniqueId());
         if (ends == null) return false;
