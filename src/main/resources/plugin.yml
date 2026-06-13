@@ -1,0 +1,134 @@
+name: InvinciblePlugin
+version: '${project.version}'
+main: com.hihelloy.invincible.InvinciblePlugin
+api-version: '1.21'
+author: Hihelloy
+description: Invincible Universe powers plugin
+softdepend: [GriefPrevention, Vault, ModelEngine, CombatLogX]
+
+commands:
+
+  invincible:
+    description: Main Invincible plugin command
+    usage: /inv <select|abilities|stats|cosmetics|bind|info|fly|character|preset|customchar|reload>
+    aliases: [inv]
+    permission: invincible.use
+
+  invincibleadmin:
+    description: Admin commands for InvinciblePlugin
+    usage: /invadmin <givepoints|reset|setchar|reload|info>
+    aliases: [invadmin]
+    permission: invincible.admin
+
+  invpreset:
+    description: Manage saved ability presets
+    usage: /invpreset <create|bind|delete|list>
+    aliases: [ipreset]
+    permission: invincible.use
+
+permissions:
+
+  invincible.*:
+    description: Grants all InvinciblePlugin permissions
+    default: op
+    children:
+      invincible.use: true
+      invincible.admin: true
+      invincible.fly: true
+      invincible.cosmetics: true
+      invincible.worldbuild: true
+      invincible.customchar: true
+
+  invincible.use:
+    description: Access to all standard player commands (/inv)
+    default: true
+    children:
+      invincible.select: true
+      invincible.abilities: true
+      invincible.stats: true
+      invincible.info: true
+      invincible.fly: true
+      invincible.character: true
+      invincible.preset: true
+
+  invincible.customchar:
+    description: Allows creating and editing a custom hero via /inv customchar
+    default: op
+
+  invincible.admin.abilitycreategui:
+    description: Open the in-game ability creator GUI
+    default: op
+
+  invincible.admin.addability:
+    description: Add an ability to a player's custom hero
+    default: op
+
+  invincible.admin.config:
+    description: Edit config values in-game via /invadmin config
+    default: op
+
+  invincible.select:
+    description: Allows /inv select — choose a character
+    default: true
+
+  invincible.abilities:
+    description: Allows /inv abilities — bind ability slots
+    default: true
+
+  invincible.stats:
+    description: Allows /inv stats — upgrade stats
+    default: true
+
+  invincible.cosmetics:
+    description: Allows /inv cosmetics — browse and equip cosmetics
+    default: true
+
+  invincible.info:
+    description: Allows /inv info — view ability details
+    default: true
+
+  invincible.fly:
+    description: Allows flight for characters that have the flight trait
+    default: true
+
+  invincible.character:
+    description: Allows /inv character — view character overview
+    default: true
+
+  invincible.preset:
+    description: Allows /invpreset (create, bind, delete, list)
+    default: true
+
+  invincible.admin:
+    description: Full access to all /invadmin commands
+    default: op
+    children:
+      invincible.admin.givepoints: true
+      invincible.admin.reset: true
+      invincible.admin.setchar: true
+      invincible.admin.reload: true
+      invincible.admin.info: true
+
+  invincible.admin.givepoints:
+    description: Allows /invadmin givepoints — give stat points to a player
+    default: op
+
+  invincible.admin.reset:
+    description: Allows /invadmin reset — reset a player's character and stats
+    default: op
+
+  invincible.admin.setchar:
+    description: Allows /invadmin setchar — force-set a player's character
+    default: op
+
+  invincible.admin.reload:
+    description: Allows /invadmin reload — reload config without restart
+    default: op
+
+  invincible.admin.info:
+    description: Allows /invadmin info — view any player's stats and character
+    default: op
+
+  invincible.worldbuild:
+    description: Allows /invbuild — generate Invincible city structures
+    default: op

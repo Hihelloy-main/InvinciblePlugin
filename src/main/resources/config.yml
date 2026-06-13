@@ -1,0 +1,2011 @@
+settings:
+  griefprevention-respect-claims: true
+  griefprevention-respect-pvp: true
+  # Worlds where InvinciblePlugin is fully disabled — no abilities, flight, or scoreboard.
+  # Add world names (case-insensitive). Reloads with /invadmin reload.
+  disabled-worlds:
+    - bendingtest
+    - spawn
+
+  action-bar-update-interval: 4
+  scoreboard-update-interval: 10
+  block-restore-ticks: 600
+  stat-points-per-kill: 3
+  underdog-gap-threshold: 15
+  underdog-max-gap: 60
+  underdog-max-reduction: 0.20
+  player-max-health: 60.0
+  max-stat-level: 30
+  base-fly-speed: 0.025
+  max-fly-speed: 0.075
+  base-walk-speed: 0.2
+  max-walk-speed: 0.28
+
+flight:
+  pose-enabled: true
+  speed-threshold: 0.3
+  glide-speed: 0.8
+  foot-particles-enabled: true
+  foot-particle-type: CLOUD
+  particle-count: 18
+  particle-spread: 0.35
+  particle-speed: 0.04
+  landing-shockwave-enabled: true
+  collision-damage: 4.0
+  collision-particle: CLOUD
+  landing-shockwave-radius: 6.0
+  landing-shockwave-rings: 5
+  landing-shockwave-particle: BLOCK
+  landing-shockwave-sound: ENTITY_GENERIC_EXPLODE
+  landing-shockwave-sound-volume: 1.2
+  landing-shockwave-sound-pitch: 0.6
+  phase-through-blocks: true
+  break-blocks: true
+  break-reach: 2.5
+  break-radius: 0.9
+  break-side-radius: 1.5
+
+combat:
+  iframe-ticks: 8
+  combo-window-ms: 2000
+  backstab-bonus: 0.30
+  momentum-bonus: 0.20
+  combo-multipliers:
+    1: 1.00
+    2: 1.10
+    3: 1.20
+    4: 1.30
+    5: 1.45
+    6: 1.60
+    7: 1.80
+    default: 2.00
+
+messages:
+  character-selected: "&aYou have become &e%character%&a!"
+  ability-bound: "&aAbility &e%ability% &abound to slot &e%slot%&a!"
+  no-character: "&cYou have not selected a character yet!"
+  no-permission: "&cYou do not have permission to do that!"
+  stat-upgraded: "&aUpgraded &e%stat% &ato level &e%level%&a!"
+  points-given: "&aGiven &e%amount% &astat points to &e%player%&a!"
+
+universal-slot-5:
+  cooldown-ms: 3000
+  velocity: 3.8
+  range: 4.5
+
+universal-slot-6:
+  cooldown-ms: 6000
+  damage: 6.0
+  range: 5.0
+  velocity: 1.8
+  hold-ticks: 40
+
+stats:
+  damage-stat-per-level: 0.2
+  speed-stat-per-level: 0.010
+  duration-stat-per-level: 0.04
+  defense-stat-per-level: 0.2
+  regen-stat-per-level: 1
+  regen-max-amplifier: 2
+  regen-amplifier-divisor: 4
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ABILITY CONFIGURATION
+# Max HP = 20 (10 hearts). No move should one-shot a full HP player.
+# Damage guide: Light=2-5, Medium=5-9, Heavy=9-13, Ultimate=13-14 (cap)
+# Radius guide: Small=3-5, Medium=5-8, Large=8-12 (never scale with dmg stat)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+abilities:
+
+  # ── INVINCIBLE ─────────────────────────────────────────────────────────────
+  INVULNERABILITY:
+    death-message: "&9%victim% &7was crushed by %killer%&7's &9Invulnerability&7 backlash."
+    enabled: true
+    cooldown-ms: 12000
+    duration-ticks: 60
+    resistance-level: 3
+    activation-trigger: RIGHT_CLICK
+
+  WISH:
+    death-message: "&a%victim% &7wished themselves to death... wait, that's on %killer%."
+    enabled: true
+    cooldown-ms: 20000
+    heal: 8.0
+
+  COMBO_STRIKE:
+    death-message: "&6%victim% &7was beaten senseless by %killer%&7's &6Combo Strike&7."
+    enabled: true
+    cooldown-ms: 4000
+    damage: 2.5
+    radius: 3.5
+    hits: 5
+    hit-delay-ticks: 4
+
+  SONIC_CLAP:
+    death-message: "&f%victim% &7was blasted away by %killer%&7's &fSonic Clap&7."
+    enabled: true
+    cooldown-ms: 10000
+    damage: 4.0
+    radius: 7.0
+    knockback: 1.8
+
+  ATOMIC_PUNCH:
+    death-message: "&c%victim% &7was obliterated by %killer%&7's &cAtomic Punch&7."
+    enabled: true
+    cooldown-ms: 10000
+    damage: 12.0
+    velocity: 2.5
+    charge-ticks: 8
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  REGENERATION:
+    death-message: "&2%victim% &7couldn't outlast %killer%&7's &2Regeneration&7."
+    enabled: true
+    cooldown-ms: 8000
+    duration-ticks: 100
+    regen-level: 1
+    activation-trigger: RIGHT_CLICK
+
+  TREMOR_SLAM:
+    death-message: "&2%victim% &7was shaken apart by %killer%&7's &2Tremor Slam&7."
+    enabled: true
+    cooldown-ms: 12000
+    damage: 6.0
+    radius: 6.0
+    knockback: 2.0
+
+  WARCRY:
+    death-message: "&c%victim% &7was pushed off the edge by %killer%&7's &cWarcry&7."
+    enabled: true
+    cooldown-ms: 10000
+    radius: 10.0
+    knockback: 2.5
+    weakness-ticks: 80
+
+  BERSERKER_RAGE:
+    death-message: "&4%victim% &7was torn apart by %killer%&7's &4Berserker Rage&7."
+    enabled: true
+    cooldown-ms: 12000
+    duration-ticks: 100
+    strength-level: 3
+    speed-level: 1
+    resistance-level: 1
+    heal: 4.0
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  VELOCITY_DIVE:
+    death-message: "&9%victim% &7was crushed beneath %killer%&7's &9Velocity Dive&7."
+    enabled: true
+    cooldown-ms: 14000
+    damage: 8.0
+    radius: 5.0
+    knockback: 2.5
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  SHOCKWAVE_LANDING:
+    death-message: "&b%victim% &7was caught in %killer%&7's &bShockwave Landing&7."
+    enabled: true
+    cooldown-ms: 12000
+    damage: 5.0
+    radius: 5.0
+    knockback: 2.5
+
+  RELENTLESS:
+    death-message: "&9%victim% &7couldn't break through %killer%&7's &9Relentless&7 defense."
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 80
+    resistance-level: 2
+    activation-trigger: RIGHT_CLICK
+
+  SUPERSONIC_STRIKE:
+    death-message: "&9%victim% &7was hit before they could react by %killer%&7's &9Supersonic Strike&7."
+    enabled: true
+    cooldown-ms: 10000
+    damage: 7.0
+    velocity: 5.0
+    strike-radius: 2.5
+    strike-ticks: 10
+
+  # ── OMNI-MAN ───────────────────────────────────────────────────────────────
+  ENDURANCE:
+    death-message: "&7%victim% &7couldn't outlast %killer%&7's &7Endurance&7."
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 80
+    resistance-level: 2
+    activation-trigger: RIGHT_CLICK
+
+  TERROR_STRIKE:
+    death-message: "&4%victim% &7fell to %killer%&7's &4Terror Strike&7."
+    enabled: true
+    cooldown-ms: 12000
+    damage: 6.0
+    radius: 5.0
+    weakness-ticks: 60
+
+  SPIN_DASH:
+    death-message: "&6%victim% &7was mowed down by %killer%&7's &6Spin Dash&7."
+    enabled: true
+    cooldown-ms: 7000
+    velocity: 2.5
+    speed-ticks: 30
+    speed-level: 2
+    activation-trigger: RIGHT_CLICK_SNEAK
+
+  INTIMIDATION_AURA:
+    death-message: "&4%victim% &7was worn down by %killer%&7's &4Intimidation Aura&7."
+    enabled: true
+    cooldown-ms: 12000
+    radius: 7.0
+    duration-ticks: 160
+    tick-damage: 0.5
+    weakness-level: 1
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  CONQUEROR_STRIKE:
+    death-message: "&c%victim% &7was felled by %killer%&7's &cConqueror Strike&7."
+    enabled: true
+    cooldown-ms: 8000
+    damage: 5.0
+    radius: 4.0
+    weakness-ticks: 60
+
+  RUTHLESS_ASSAULT:
+    death-message: "&4%victim% &7couldn't survive %killer%&7's &4Ruthless Assault&7."
+    enabled: true
+    cooldown-ms: 12000
+    damage: 5.0
+    radius: 8.0
+    slowness-ticks: 40
+
+  IMPERIAL_RAGE:
+    death-message: "&4%victim% &7was destroyed by %killer%&7's &4Imperial Rage&7."
+    enabled: true
+    cooldown-ms: 15000
+    duration-ticks: 60
+    strength-level: 4
+    speed-level: 2
+    resistance-level: 1
+    backlash-damage: 4.0
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  GROUND_POUND:
+    death-message: "&c%victim% &7was ground into dust by %killer%&7's &cGround Pound&7."
+    enabled: true
+    cooldown-ms: 12000
+    damage: 7.0
+    radius: 5.0
+    knockback: 2.5
+
+  VILTRUMITE_CHARGE:
+    death-message: "&c%victim% &7was run through by %killer%&7's &cViltrumite Charge&7."
+    enabled: true
+    cooldown-ms: 10000
+    damage: 6.0
+    velocity: 5.5
+    strike-radius: 2.5
+    strike-ticks: 10
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  SUBJUGATION_GRIP:
+    death-message: "&4%victim% &7was hurled to their death by %killer%&7's &4Subjugation Grip&7."
+    enabled: true
+    cooldown-ms: 14000
+    damage: 5.0
+    target-radius: 4.0
+
+  SONIC_BOOM_PASS:
+    death-message: "&c%victim% &7was torn apart by %killer%&7's &cSonic Boom Pass&7."
+    enabled: true
+    cooldown-ms: 10000
+    damage: 5.0
+    velocity: 5.5
+    strike-radius: 2.5
+    strike-ticks: 10
+
+  # ── ATOM EVE ───────────────────────────────────────────────────────────────
+  MATTER_RESHAPE:
+    death-message: "&d%victim% &7was reshaped out of existence by %killer%&7's &dMatter Reshape&7."
+    enabled: true
+    cooldown-ms: 4000
+    range: 8
+
+  ENERGY_SHIELD:
+    death-message: "&b%victim% &7was reflected back by %killer%&7's &bEnergy Shield&7."
+    enabled: true
+    cooldown-ms: 8000
+    duration-ticks: 80
+    resistance-level: 3
+    activation-trigger: RIGHT_CLICK
+
+  HEALING_TOUCH:
+    death-message: "&a%victim% &7couldn't outlast %killer%&7's &aHealing Touch&7."
+    enabled: true
+    cooldown-ms: 10000
+    heal: 8.0
+    regen-ticks: 60
+    regen-level: 1
+    activation-trigger: RIGHT_CLICK
+
+  MATTER_BLAST:
+    death-message: "&d%victim% &7was blasted by %killer%&7's &dMatter Blast&7."
+    enabled: true
+    cooldown-ms: 8000
+    damage: 5.0
+    range: 14.0
+
+  CONSTRUCT_ARMOR:
+    death-message: "&e%victim% &7was crushed by %killer%&7's &eConstruct Armor&7."
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 80
+    resistance-level: 2
+    activation-trigger: RIGHT_CLICK
+
+  TRANSMUTE_GROUND:
+    death-message: "&2%victim% &7was transmuted by %killer%&7's &2Transmute Ground&7."
+    enabled: true
+    cooldown-ms: 6000
+    range: 8
+
+  ATOMIC_BURST:
+    death-message: "&d%victim% &7was atomised by %killer%&7's &dAtomic Burst&7."
+    enabled: true
+    cooldown-ms: 15000
+    damage: 10.0
+    radius: 10.0
+    knockback: 3.0
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  DIMENSIONAL_SHIFT:
+    death-message: "&d%victim% &7was phased out of existence by %killer%&7's &dDimensional Shift&7."
+    enabled: true
+    cooldown-ms: 12000
+    duration-ticks: 40
+    resistance-level: 3
+    activation-trigger: RIGHT_CLICK_SNEAK
+
+  ATOMIC_CAGE:
+    death-message: "&d%victim% &7was caged and finished by %killer%&7's &dAtomic Cage&7."
+    enabled: true
+    cooldown-ms: 8000
+    radius: 5.0
+    duration-ticks: 60
+    slowness-level: 8
+    weakness-level: 2
+
+  PINK_BEAM:
+    death-message: "&d%victim% &7was vaporised by %killer%&7's &dPink Beam&7."
+    enabled: true
+    cooldown-ms: 10000
+    damage: 6.0
+    range: 18.0
+
+  ATOMIC_FLIGHT:
+    death-message: "&d%victim% &7was struck down mid-flight by %killer%&7."
+    enabled: true
+    cooldown-ms: 0
+
+  MATTER_WALL:
+    death-message: "&d%victim% &7was crushed against %killer%&7's &dMatter Wall&7."
+    enabled: true
+    cooldown-ms: 8000
+    range: 8
+
+  # ── REX SPLODE ─────────────────────────────────────────────────────────────
+  EXPLOSIVE_CHARGE:
+    death-message: "&6%victim% &7detonated by %killer%&7's &6Explosive Charge&7."
+    enabled: true
+    cooldown-ms: 10000
+    damage: 6.0
+    aoe-radius: 4.0
+    range: 20.0
+
+  KINETIC_INFUSE:
+    death-message: "&e%victim% &7was detonated by %killer%&7's &eKinetic Infuse&7."
+    enabled: true
+    cooldown-ms: 12000
+    damage: 8.0
+    duration-ticks: 200
+    radius: 4.0
+
+  SPLODE_DASH:
+    death-message: "&6%victim% &7was blasted by %killer%&7's &6Splode Dash&7."
+    enabled: true
+    cooldown-ms: 7000
+    velocity: 3.5
+    activation-trigger: RIGHT_CLICK_SNEAK
+
+  CHAIN_EXPLOSION:
+    death-message: "&c%victim% &7was caught in %killer%&7's &cChain Explosion&7."
+    enabled: true
+    cooldown-ms: 10000
+    damage: 5.0
+    aoe-radius: 3.5
+    explosion-count: 5
+
+  GRENADE_VOLLEY:
+    death-message: "&6%victim% &7was bombarded by %killer%&7's &6Grenade Volley&7."
+    enabled: true
+    cooldown-ms: 12000
+    damage: 5.0
+    aoe-radius: 4.0
+
+  DETONATION_FIELD:
+    death-message: "&c%victim% &7walked into %killer%&7's &cDetonation Field&7."
+    enabled: true
+    cooldown-ms: 12000
+    radius: 4.5
+    duration-ticks: 80
+    tick-damage: 1.5
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  IMPACT_WAVE:
+    death-message: "&6%victim% &7was swept away by %killer%&7's &6Impact Wave&7."
+    enabled: true
+    cooldown-ms: 12000
+    damage: 3.0
+    range: 10.0
+    knockback: 2.0
+
+  REX_BURST:
+    death-message: "&c%victim% &7was annihilated by %killer%&7's &cRex Burst&7."
+    enabled: true
+    cooldown-ms: 15000
+    damage: 12.0
+    radius: 12.0
+    knockback: 3.5
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  PROXIMITY_MINE:
+    death-message: "&e%victim% &7stumbled onto %killer%&7's &eProximity Mine&7."
+    enabled: true
+    cooldown-ms: 14000
+    damage: 8.0
+    trigger-radius: 2.5
+    aoe-radius: 4.0
+    duration-ticks: 300
+
+  KINETIC_SHIELD:
+    death-message: "&e%victim% &7was reflected by %killer%&7's &eKinetic Shield&7."
+    enabled: true
+    cooldown-ms: 14000
+    duration-ticks: 100
+    resistance-level: 3
+
+  CLUSTER_BLAST:
+    death-message: "&c%victim% &7was shredded by %killer%&7's &cCluster Blast&7."
+    enabled: true
+    cooldown-ms: 14000
+    damage: 8.0
+    aoe-radius: 5.0
+
+  CHARGE_SPRINT:
+    death-message: "&6%victim% &7was run over by %killer%&7's &6Charge Sprint&7."
+    enabled: true
+    cooldown-ms: 6000
+    velocity: 4.0
+    activation-trigger: RIGHT_CLICK_SNEAK
+
+  # ── ROBOT ──────────────────────────────────────────────────────────────────
+  DRONE_SWARM:
+    death-message: "&7%victim% &7was swarmed to death by %killer%&7's &7Drone Swarm&7."
+    enabled: true
+    cooldown-ms: 10000
+    radius: 7.0
+    tick-damage: 1.0
+    duration-ticks: 60
+
+  FORCE_FIELD:
+    death-message: "&7%victim% &7was repelled to death by %killer%&7's &7Force Field&7."
+    enabled: true
+    cooldown-ms: 8000
+    duration-ticks: 80
+    resistance-level: 3
+    activation-trigger: RIGHT_CLICK
+
+  LASER_ARRAY:
+    death-message: "&7%victim% &7was precision-sliced by %killer%&7's &7Laser Array&7."
+    enabled: true
+    cooldown-ms: 10000
+    damage: 8.0
+    range: 20.0
+    blindness-ticks: 40
+
+  NANITE_REPAIR:
+    death-message: "&7%victim% &7couldn't outlast %killer%&7's &7Nanite Repair&7."
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 100
+    regen-level: 1
+    activation-trigger: RIGHT_CLICK
+
+  EMP_PULSE:
+    death-message: "&7%victim% &7was shut down by %killer%&7's &7EMP Pulse&7."
+    enabled: true
+    cooldown-ms: 10000
+    radius: 10.0
+    slowness-ticks: 80
+    weakness-ticks: 80
+
+  TACTICAL_SCAN:
+    death-message: "&7%victim% &7had nowhere to hide from %killer%&7's &7Tactical Scan&7."
+    enabled: true
+    cooldown-ms: 6000
+    radius: 20.0
+
+  MECH_OVERLOAD:
+    death-message: "&7%victim% &7was overwhelmed by %killer%&7's &7Mech Overload&7."
+    enabled: true
+    cooldown-ms: 12000
+    duration-ticks: 60
+    strength-level: 4
+    speed-level: 2
+    backlash-damage: 4.0
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  ELECTROMAGNETIC_FIELD:
+    death-message: "&7%victim% &7was fried by %killer%&7's &7Electromagnetic Field&7."
+    enabled: true
+    cooldown-ms: 10000
+    radius: 5.0
+    duration-ticks: 100
+    tick-damage: 1.5
+    slowness-level: 2
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  ROCKET_BARRAGE:
+    death-message: "&7%victim% &7was bombarded by %killer%&7's &7Rocket Barrage&7."
+    enabled: true
+    cooldown-ms: 14000
+    radius: 7.0
+    tick-damage: 1.0
+    duration-ticks: 60
+
+  GRAVITIC_SLAM:
+    death-message: "&7%victim% &7was gravity-slammed by %killer%&7's &7Gravitic Slam&7."
+    enabled: true
+    cooldown-ms: 14000
+    damage: 6.0
+    radius: 7.0
+    slowness-ticks: 40
+    slowness-level: 2
+
+  SYSTEM_BOOST:
+    death-message: "&7%victim% &7couldn't match %killer%&7's &7System Boost&7."
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 80
+    strength-level: 2
+    speed-level: 1
+    resistance-level: 1
+    activation-trigger: RIGHT_CLICK
+
+  # ── DUPLI-KATE ─────────────────────────────────────────────────────────────
+  DUPLICATE_SELF:
+    death-message: "&d%victim% &7was overwhelmed by %killer%&7's &dDuplicate Self&7."
+    enabled: true
+    cooldown-ms: 8000
+    clone-count: 3
+
+  SWARM_STRIKE:
+    death-message: "&d%victim% &7was swarmed by %killer%&7's &dSwarm Strike&7."
+    enabled: true
+    cooldown-ms: 6000
+    damage: 5.0
+    radius: 7.0
+
+  CLONE_SHIELD:
+    death-message: "&d%victim% &7was blocked and finished by %killer%&7's &dClone Shield&7."
+    enabled: true
+    cooldown-ms: 12000
+    duration-ticks: 100
+    resistance-level: 3
+
+  MASS_ASSAULT:
+    death-message: "&d%victim% &7was buried under %killer%&7's &dMass Assault&7."
+    enabled: true
+    cooldown-ms: 14000
+    damage: 6.0
+    radius: 10.0
+    slowness-ticks: 40
+
+  DIVERSION_CLONE:
+    death-message: "&d%victim% &7was tricked and killed by %killer%&7's &dDiversion Clone&7."
+    enabled: true
+    cooldown-ms: 8000
+    range: 10.0
+    activation-trigger: RIGHT_CLICK_SNEAK
+
+  PINCER_ATTACK:
+    death-message: "&d%victim% &7was caught in %killer%&7's &dPincer Attack&7."
+    enabled: true
+    cooldown-ms: 10000
+    damage: 6.0
+    radius: 8.0
+
+  CLONE_SURGE:
+    death-message: "&d%victim% &7was overwhelmed by %killer%&7's &dClone Surge&7."
+    enabled: true
+    cooldown-ms: 8000
+    range: 10.0
+    activation-trigger: RIGHT_CLICK_SNEAK
+
+  DUPLICATE_BURST:
+    death-message: "&d%victim% &7was detonated by %killer%&7's &dDuplicate Burst&7."
+    enabled: true
+    cooldown-ms: 15000
+    damage: 12.0
+    radius: 12.0
+    knockback: 3.5
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  CLONE_AMBUSH:
+    death-message: "&d%victim% &7was ambushed by %killer%&7's &dClone Ambush&7."
+    enabled: true
+    cooldown-ms: 12000
+    damage: 6.0
+    radius: 8.0
+
+  INFINITE_COPIES:
+    death-message: "&d%victim% &7was outnumbered by %killer%&7's &dInfinite Copies&7."
+    enabled: true
+    cooldown-ms: 10000
+    clone-count: 3
+
+  COPY_FADE:
+    death-message: "&d%victim% &7couldn't keep up with %killer%&7's &dCopy Fade&7."
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 100
+    speed-level: 1
+
+  BODY_DOUBLE:
+    death-message: "&d%victim% &7was confused to death by %killer%&7's &dBody Double&7."
+    enabled: true
+    cooldown-ms: 14000
+    duration-ticks: 100
+    resistance-level: 3
+    activation-trigger: RIGHT_CLICK
+
+  # ── MONSTER GIRL ───────────────────────────────────────────────────────────
+  MONSTER_TRANSFORM:
+    death-message: "&2%victim% &7was mauled by %killer%&7's &2Monster Transform&7."
+    enabled: true
+    cooldown-ms: 12000
+    duration-ticks: 160
+    strength-level: 3
+    resistance-level: 2
+    regen-level: 1
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  RAMPAGE:
+    death-message: "&2%victim% &7was caught in %killer%&7's &2Rampage&7."
+    enabled: true
+    cooldown-ms: 12000
+    duration-ticks: 80
+    damage: 3.0
+    radius: 5.0
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  REGENERATE:
+    death-message: "&2%victim% &7couldn't outlast %killer%&7's &2Regenerate&7."
+    enabled: true
+    cooldown-ms: 14000
+    duration-ticks: 100
+    regen-level: 1
+    activation-trigger: RIGHT_CLICK
+
+  TREMOR_SLAM_MG:
+    death-message: "&2%victim% &7was ground-slammed by %killer%&7's &2Tremor Slam&7."
+    enabled: true
+    cooldown-ms: 10000
+    damage: 7.0
+    radius: 7.0
+    knockback: 2.0
+
+  MONSTER_ROAR:
+    death-message: "&2%victim% &7was blown away by %killer%&7's &2Monster Roar&7."
+    enabled: true
+    cooldown-ms: 14000
+    radius: 10.0
+    knockback: 2.5
+    weakness-ticks: 80
+
+  TAIL_SWEEP:
+    death-message: "&2%victim% &7was swept off their feet by %killer%&7's &2Tail Sweep&7."
+    enabled: true
+    cooldown-ms: 8000
+    damage: 4.0
+    radius: 6.0
+    knockback: 1.5
+
+  THICK_HIDE:
+    death-message: "&2%victim% &7couldn't pierce %killer%&7's &2Thick Hide&7."
+    enabled: true
+    cooldown-ms: 8000
+    duration-ticks: 100
+    resistance-level: 2
+    activation-trigger: RIGHT_CLICK
+
+  FERAL_CHARGE:
+    death-message: "&2%victim% &7was trampled by %killer%&7's &2Feral Charge&7."
+    enabled: true
+    cooldown-ms: 8000
+    velocity: 3.0
+    speed-ticks: 30
+    speed-level: 2
+
+  MONSTER_LEAP:
+    death-message: "&2%victim% &7was pounced on by %killer%&7's &2Monster Leap&7."
+    enabled: true
+    cooldown-ms: 8000
+    velocity: 4.0
+    target-radius: 20.0
+
+  CRUSHING_GRIP:
+    death-message: "&2%victim% &7was crushed by %killer%&7's &2Crushing Grip&7."
+    enabled: true
+    cooldown-ms: 12000
+    damage: 6.0
+    target-radius: 4.0
+
+  EARTH_SHATTER:
+    death-message: "&2%victim% &7was shattered by %killer%&7's &2Earth Shatter&7."
+    enabled: true
+    cooldown-ms: 14000
+    damage: 8.0
+    radius: 8.0
+    knockback: 2.0
+
+  BERSERK_ROAR:
+    death-message: "&2%victim% &7was roared to death by %killer%&7's &2Berserk Roar&7."
+    enabled: true
+    cooldown-ms: 10000
+    radius: 10.0
+    knockback: 2.5
+    weakness-ticks: 80
+
+  # ── BLACK SAMSON ───────────────────────────────────────────────────────────
+  ENERGY_DISCHARGE:
+    death-message: "&6%victim% &7was discharged by %killer%&7's &6Energy Discharge&7."
+    enabled: true
+    cooldown-ms: 10000
+    damage: 6.0
+    radius: 5.0
+    fire-ticks: 60
+
+  SAMSON_CHARGE:
+    death-message: "&6%victim% &7was charged through by %killer%&7's &6Samson Charge&7."
+    enabled: true
+    cooldown-ms: 8000
+    damage: 8.0
+    radius: 5.0
+    strength-level: 3
+    delay-ticks: 20
+
+  POWER_SLAM:
+    death-message: "&6%victim% &7was power-slammed by %killer%&7's &6Power Slam&7."
+    enabled: true
+    cooldown-ms: 10000
+    damage: 7.0
+    radius: 6.0
+    knockback: 2.0
+
+  LIGHTNING_STRIKE:
+    death-message: "&6%victim% &7was struck down by %killer%&7's &6Lightning Strike&7."
+    enabled: true
+    cooldown-ms: 12000
+    damage: 8.0
+    radius: 5.0
+    fire-ticks: 60
+
+  ENERGY_BURST:
+    death-message: "&6%victim% &7was burst apart by %killer%&7's &6Energy Burst&7."
+    enabled: true
+    cooldown-ms: 12000
+    damage: 11.0
+    radius: 10.0
+    knockback: 3.0
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  OVERCHARGE:
+    death-message: "&6%victim% &7was overcharged by %killer%&7's &6Overcharge&7."
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 80
+    strength-level: 3
+    speed-level: 1
+    regen-level: 1
+    activation-trigger: RIGHT_CLICK
+
+  ENERGY_LANCE:
+    death-message: "&6%victim% &7was lanced through by %killer%&7's &6Energy Lance&7."
+    enabled: true
+    cooldown-ms: 8000
+    damage: 8.0
+    range: 20.0
+    blindness-ticks: 40
+
+  CHAIN_LIGHTNING:
+    death-message: "&6%victim% &7was chained to death by %killer%&7's &6Chain Lightning&7."
+    enabled: true
+    cooldown-ms: 12000
+    damage: 6.0
+    radius: 5.0
+    fire-ticks: 60
+
+  POWER_ARMOR:
+    death-message: "&6%victim% &7couldn't dent %killer%&7's &6Power Armor&7."
+    enabled: true
+    cooldown-ms: 8000
+    duration-ticks: 100
+    resistance-level: 2
+
+  ENERGY_VORTEX:
+    death-message: "&6%victim% &7was pulled apart by %killer%&7's &6Energy Vortex&7."
+    enabled: true
+    cooldown-ms: 10000
+    radius: 5.0
+    duration-ticks: 100
+    tick-damage: 1.5
+    slowness-level: 2
+
+  BATTLE_HARNESS:
+    death-message: "&6%victim% &7couldn't match %killer%&7's &6Battle Harness&7."
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 100
+    strength-level: 3
+    speed-level: 1
+    resistance-level: 1
+
+  # ── BULLETPROOF ────────────────────────────────────────────────────────────
+  ELECTRIC_DASH:
+    death-message: "&b%victim% &7was shocked and slammed by %killer%&7's &bElectric Dash&7."
+    enabled: true
+    cooldown-ms: 8000
+    velocity: 5.0
+    radius: 2.5
+    damage: 6.0
+    slowness-ticks: 40
+    activation-trigger: RIGHT_CLICK_SNEAK
+
+  BULLET_IMMUNITY:
+    death-message: "&f%victim% &7bounced off %killer%&7's &fBullet Immunity&7."
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 100
+    resistance-level: 3
+
+  DEFLECT:
+    death-message: "&f%victim% &7was deflected to death by %killer%&7."
+    enabled: true
+    cooldown-ms: 8000
+    duration-ticks: 40
+    resistance-level: 3
+    activation-trigger: RIGHT_CLICK
+
+  COUNTER_STRIKE:
+    death-message: "&f%victim% &7attacked first but %killer%&7's &fCounter Strike&7 hit back harder."
+    enabled: true
+    cooldown-ms: 8000
+    duration-ticks: 40
+    resistance-level: 3
+
+  STEEL_SKIN:
+    death-message: "&f%victim% &7shattered themselves against %killer%&7's &fSteel Skin&7."
+    enabled: true
+    cooldown-ms: 14000
+    duration-ticks: 100
+    resistance-level: 2
+    activation-trigger: RIGHT_CLICK
+
+  FORCE_RETURN:
+    death-message: "&f%victim% &7was returned to sender by %killer%&7's &fForce Return&7."
+    enabled: true
+    cooldown-ms: 12000
+    damage: 8.0
+    target-radius: 5.0
+
+  IMPACT_ABSORB:
+    death-message: "&f%victim% &7was absorbed and finished by %killer%&7's &fImpact Absorb&7."
+    enabled: true
+    cooldown-ms: 14000
+    duration-ticks: 80
+    resistance-level: 3
+    regen-level: 1
+    activation-trigger: RIGHT_CLICK
+
+  ARMOR_SURGE:
+    death-message: "&f%victim% &7couldn't crack %killer%&7's &fArmor Surge&7."
+    enabled: true
+    cooldown-ms: 8000
+    duration-ticks: 100
+    resistance-level: 3
+    activation-trigger: RIGHT_CLICK
+
+  RICOCHET:
+    death-message: "&f%victim% &7was bounced into oblivion by %killer%&7's &fRicochet&7."
+    enabled: true
+    cooldown-ms: 10000
+    damage: 6.0
+    radius: 6.0
+    knockback: 2.5
+
+  IRON_RUSH:
+    death-message: "&f%victim% &7was steamrolled by %killer%&7's &fIron Rush&7."
+    enabled: true
+    cooldown-ms: 12000
+    damage: 6.0
+    velocity: 4.5
+    strike-radius: 2.5
+    strike-ticks: 10
+
+  SKIN_FORTRESS:
+    death-message: "&f%victim% &7crumbled against %killer%&7's &fSkin Fortress&7."
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 100
+    resistance-level: 3
+    activation-trigger: RIGHT_CLICK
+
+  REACTIVE_SHELL:
+    death-message: "&f%victim% &7triggered %killer%&7's &fReactive Shell&7 and paid for it."
+    enabled: true
+    cooldown-ms: 8000
+    duration-ticks: 100
+    resistance-level: 3
+    activation-trigger: RIGHT_CLICK
+
+  CONCUSSIVE_RETURN:
+    death-message: "&f%victim% &7was concussed to death by %killer%&7's &fConcussive Return&7."
+    enabled: true
+    cooldown-ms: 12000
+    damage: 8.0
+    target-radius: 5.0
+
+  IRON_DENSITY:
+    death-message: "&f%victim% &7was crushed by %killer%&7's &fIron Density&7."
+    enabled: true
+    cooldown-ms: 8000
+    duration-ticks: 100
+    resistance-level: 3
+    slowness-level: 2
+
+  KINETIC_FEEDBACK:
+    death-message: "&f%victim% &7's own force was returned by %killer%&7's &fKinetic Feedback&7."
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 100
+    damage-reduction: 0.5
+    release-radius: 8.0
+    activation-trigger: RIGHT_CLICK
+
+  TITANIUM_RUSH:
+    death-message: "&f%victim% &7was ploughed through by %killer%&7's &fTitanium Rush&7."
+    enabled: true
+    cooldown-ms: 10000
+    damage: 10.0
+    velocity: 6.0
+    hit-radius: 2.0
+
+  DENSITY_SLAM:
+    death-message: "&f%victim% &7was density-slammed by %killer%&7's &fDensity Slam&7."
+    enabled: true
+    cooldown-ms: 10000
+    damage: 10.0
+    radius: 8.0
+    knockback: 3.5
+    velocity: -3.0
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  KINETIC_RELEASE:
+    death-message: "&f%victim% &7was released into the afterlife by %killer%&7's &fKinetic Release&7."
+    enabled: true
+    cooldown-ms: 10000
+    damage: 8.0
+    radius: 6.0
+    knockback: 3.0
+
+  SHOCKWAVE_FIST:
+    death-message: "&f%victim% &7was shockwaved by %killer%&7's &fShockwave Fist&7."
+    enabled: true
+    cooldown-ms: 14000
+    damage: 8.0
+    range: 14.0
+    knockback: 3.0
+
+  IMPENETRABLE:
+    death-message: "&f%victim% &7couldn't so much as scratch %killer%&7."
+    enabled: true
+    cooldown-ms: 15000
+    duration-ticks: 60
+    resistance-level: 255
+    activation-trigger: RIGHT_CLICK
+
+  BULLET_CATCH:
+    death-message: "&f%victim% &7had their own attack returned double by %killer%&7."
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 80
+    return-multiplier: 2
+    activation-trigger: RIGHT_CLICK
+
+  MOMENTUM_TRANSFER:
+    death-message: "&f%victim% &7had their momentum transferred to the grave by %killer%&7."
+    enabled: true
+    cooldown-ms: 10000
+    damage: 8.0
+    target-radius: 5.0
+
+  UNSTOPPABLE:
+    death-message: "&f%victim% &7couldn't stop %killer%&7's &fUnstoppable&7 charge."
+    enabled: true
+    cooldown-ms: 8000
+    damage: 6.0
+    velocity: 5.0
+    strike-radius: 2.5
+    strike-ticks: 8
+
+  STELLAR_SLAM:
+    death-message: "&f%victim% &7was star-slammed by %killer%&7's &fStellar Slam&7."
+    enabled: true
+    cooldown-ms: 12000
+    damage: 11.0
+    radius: 10.0
+    knockback: 4.0
+    velocity: -4.0
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  INTERSTELLAR_DASH:
+    death-message: "&f%victim% &7was demolished by %killer%&7's &fInterstellar Dash&7."
+    enabled: true
+    cooldown-ms: 10000
+    damage: 8.0
+    velocity: 20.0
+    radius: 4.0
+    activation-trigger: RIGHT_CLICK_SNEAK
+
+  COSMIC_ROAR:
+    death-message: "&f%victim% &7was silenced by %killer%&7's &fCosmic Roar&7."
+    enabled: true
+    cooldown-ms: 8000
+    radius: 10.0
+    duration-ticks: 40
+    slowness-level: 4
+    weakness-level: 2
+
+  REGENERATIVE_SURGE:
+    death-message: "&f%victim% &7couldn't outlast %killer%&7's &fRegenerative Surge&7."
+    enabled: true
+    cooldown-ms: 14000
+    heal-percent: 50.0
+    min-heal: 8.0
+    regen-ticks: 60
+    regen-level: 2
+
+  # ── ALLEN THE ALIEN ────────────────────────────────────────────────────────
+  RAPID_ADAPT:
+    death-message: "&9%victim% &7couldn't adapt to %killer%&7's &9Rapid Adapt&7."
+    enabled: true
+    cooldown-ms: 14000
+    duration-ticks: 80
+    resistance-level: 2
+    activation-trigger: RIGHT_CLICK
+
+  ADAPTATION_SHIELD:
+    death-message: "&9%victim% &7was outlasted by %killer%&7's &9Adaptation Shield&7."
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 100
+    resistance-level: 3
+
+  COSMIC_PUNCH:
+    death-message: "&9%victim% &7was cosmically punched to oblivion by %killer%&7."
+    enabled: true
+    cooldown-ms: 10000
+    damage: 12.0
+    velocity: 3.0
+    charge-ticks: 8
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  GALACTIC_BURST:
+    death-message: "&9%victim% &7was caught in %killer%&7's &9Galactic Burst&7."
+    enabled: true
+    cooldown-ms: 15000
+    damage: 12.0
+    radius: 12.0
+    knockback: 3.0
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  ALIEN_RESILIENCE:
+    death-message: "&9%victim% &7couldn't outlast %killer%&7's &9Alien Resilience&7."
+    enabled: true
+    cooldown-ms: 8000
+    duration-ticks: 80
+    resistance-level: 2
+    regen-level: 1
+    activation-trigger: RIGHT_CLICK
+
+  ORBIT_DASH:
+    death-message: "&9%victim% &7was orbited right into the ground by %killer%&7."
+    enabled: true
+    cooldown-ms: 5000
+    velocity: 4.0
+    activation-trigger: RIGHT_CLICK_SNEAK
+
+  PAIN_THRESHOLD:
+    death-message: "&9%victim% &7hit %killer%&7's &9Pain Threshold&7 and died trying."
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 80
+    resistance-level: 2
+    activation-trigger: RIGHT_CLICK
+
+  ALIEN_OVERDRIVE:
+    death-message: "&9%victim% &7was overdriven by %killer%&7's &9Alien Overdrive&7."
+    enabled: true
+    cooldown-ms: 12000
+    damage: 12.0
+    radius: 12.0
+    knockback: 4.0
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  WAR_CRY:
+    death-message: "&9%victim% &7was cried to death by %killer%&7's &9War Cry&7."
+    enabled: true
+    cooldown-ms: 10000
+    radius: 10.0
+    knockback: 2.5
+    weakness-ticks: 80
+
+  SAVAGE_STRIKE:
+    death-message: "&9%victim% &7was savagely struck by %killer%&7's &9Savage Strike&7."
+    enabled: true
+    cooldown-ms: 10000
+    damage: 7.0
+    radius: 5.0
+    weakness-ticks: 60
+
+  # ── BATTLE BEAST ───────────────────────────────────────────────────────────
+  UNYIELDING:
+    death-message: "&5%victim% &7couldn't break %killer%&7's &5Unyielding&7 will."
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 80
+    resistance-level: 2
+    activation-trigger: RIGHT_CLICK
+
+  MANE_SHIELD:
+    death-message: "&5%victim% &7shattered against %killer%&7's &5Mane Shield&7."
+    enabled: true
+    cooldown-ms: 8000
+    duration-ticks: 80
+    resistance-level: 3
+    activation-trigger: RIGHT_CLICK
+
+  PREDATOR_LEAP:
+    death-message: "&5%victim% &7was pounced on by %killer%&7's &5Predator Leap&7."
+    enabled: true
+    cooldown-ms: 8000
+    velocity: 3.0
+    target-radius: 18.0
+
+  WARRIOR_BLOOD:
+    death-message: "&5%victim% &7was outlasted by %killer%&7's &5Warrior Blood&7."
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 80
+    strength-level: 2
+    speed-level: 1
+    resistance-level: 1
+    heal: 4.0
+    activation-trigger: RIGHT_CLICK
+
+  BATTLE_ROAR:
+    death-message: "&5%victim% &7was roared into oblivion by %killer%&7's &5Battle Roar&7."
+    enabled: true
+    cooldown-ms: 10000
+    radius: 10.0
+    knockback: 2.5
+    weakness-ticks: 80
+
+  PRIMAL_FRENZY:
+    death-message: "&5%victim% &7couldn't survive %killer%&7's &5Primal Frenzy&7."
+    enabled: true
+    cooldown-ms: 12000
+    duration-ticks: 60
+    strength-level: 4
+    speed-level: 2
+    resistance-level: 1
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  DEATH_CHARGE:
+    death-message: "&5%victim% &7was charged to death by %killer%&7's &5Death Charge&7."
+    enabled: true
+    cooldown-ms: 9000
+    velocity: 3.0
+    target-radius: 18.0
+
+  BONE_CRUSH:
+    death-message: "&5%victim% &7had every bone crushed by %killer%&7's &5Bone Crush&7."
+    enabled: true
+    cooldown-ms: 10000
+    damage: 6.0
+    target-radius: 4.0
+
+  BEAST_ENDURANCE:
+    death-message: "&5%victim% &7couldn't outlast %killer%&7's &5Beast Endurance&7."
+    enabled: true
+    cooldown-ms: 8000
+    duration-ticks: 80
+    resistance-level: 2
+    activation-trigger: RIGHT_CLICK
+
+  KILLING_BLOW:
+    death-message: "&5%victim% &7was finished with %killer%&7's &5Killing Blow&7."
+    enabled: true
+    cooldown-ms: 10000
+    damage: 10.0
+    radius: 4.5
+    execute-threshold-percent: 30
+
+  IRON_WILL:
+    death-message: "&5%victim% &7broke against %killer%&7's &5Iron Will&7."
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 80
+    resistance-level: 3
+    activation-trigger: RIGHT_CLICK
+
+  # ── CONQUEST ───────────────────────────────────────────────────────────────
+  BATTLE_HARDENED:
+    death-message: "&8%victim% &7couldn't crack %killer%&7's &8Battle Hardened&7 skin."
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 80
+    resistance-level: 2
+    activation-trigger: RIGHT_CLICK
+
+  SCAR_POWER:
+    death-message: "&8%victim% &7was overpowered by %killer%&7's &8Scar Power&7."
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 80
+    strength-level: 3
+
+  CONQUEST_RAGE:
+    death-message: "&8%victim% &7was consumed by %killer%&7's &8Conquest Rage&7."
+    enabled: true
+    cooldown-ms: 15000
+    duration-ticks: 60
+    strength-level: 5
+    speed-level: 2
+    resistance-level: 1
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  CONQUEROR_CHARGE:
+    death-message: "&8%victim% &7was run down by %killer%&7's &8Conqueror Charge&7."
+    enabled: true
+    cooldown-ms: 10000
+    damage: 6.0
+    velocity: 5.5
+    strike-radius: 2.5
+    strike-ticks: 10
+
+  BLADE_SPIN:
+    death-message: "&8%victim% &7was cut apart by %killer%&7's &8Blade Spin&7."
+    enabled: true
+    cooldown-ms: 10000
+    damage: 4.0
+    radius: 5.0
+
+  DEVASTATION:
+    death-message: "&8%victim% &7was devastated by %killer%&7."
+    enabled: true
+    cooldown-ms: 15000
+    damage: 12.0
+    radius: 10.0
+    knockback: 3.0
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  OPPRESSOR_GRIP:
+    death-message: "&8%victim% &7was gripped and crushed by %killer%&7's &8Oppressor Grip&7."
+    enabled: true
+    cooldown-ms: 12000
+    damage: 5.0
+    target-radius: 4.0
+
+  # ── THRAGG ─────────────────────────────────────────────────────────────────
+  VILTRUMITE_ENDURANCE:
+    death-message: "&c%victim% &7couldn't outlast %killer%&7's &cViltrumite Endurance&7."
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 80
+    resistance-level: 2
+    activation-trigger: RIGHT_CLICK
+
+  JUGULAR_STRIKE:
+    death-message: "&c%victim% &7was jugular-struck by %killer%&7."
+    enabled: true
+    cooldown-ms: 12000
+    damage: 7.0
+    radius: 4.0
+    execute-threshold-percent: 30
+
+  GRAND_REGENT_AURA:
+    death-message: "&c%victim% &7was worn away by %killer%&7's &cGrand Regent Aura&7."
+    enabled: true
+    cooldown-ms: 12000
+    radius: 8.0
+    duration-ticks: 160
+    tick-damage: 0.8
+    weakness-level: 2
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  VILTRUMITE_MASTERY:
+    death-message: "&c%victim% &7was mastered into the grave by %killer%&7."
+    enabled: true
+    cooldown-ms: 15000
+    damage: 12.0
+    radius: 12.0
+    knockback: 3.5
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  SUPREME_AUTHORITY:
+    death-message: "&c%victim% &7knelt before %killer%&7's &cSupreme Authority&7 and never got up."
+    enabled: true
+    cooldown-ms: 12000
+    radius: 10.0
+    duration-ticks: 40
+    slowness-level: 10
+    weakness-level: 4
+    knockback: 2.5
+
+  LETHAL_DESCENT:
+    death-message: "&c%victim% &7was descended upon lethally by %killer%&7."
+    enabled: true
+    cooldown-ms: 12000
+    damage: 8.0
+    radius: 5.0
+    knockback: 2.5
+
+  IRON_DYNASTY:
+    death-message: "&c%victim% &7fell to %killer%&7's &cIron Dynasty&7."
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 80
+    resistance-level: 2
+    activation-trigger: RIGHT_CLICK
+
+  CULLING_STRIKE:
+    death-message: "&c%victim% &7was culled by %killer%&7's &cCulling Strike&7."
+    enabled: true
+    cooldown-ms: 10000
+    damage: 10.0
+    radius: 4.5
+    execute-threshold-percent: 30
+    activation-trigger: ENTITY_HIT
+
+  SOVEREIGN_SLAM:
+    death-message: "&c%victim% &7was sovereignty-slammed by %killer%&7."
+    enabled: true
+    cooldown-ms: 14000
+    damage: 8.0
+    radius: 7.0
+    knockback: 2.5
+
+  WARLORD_WRATH:
+    death-message: "&c%victim% &7faced %killer%&7's &cWarlord Wrath&7 and perished."
+    enabled: true
+    cooldown-ms: 15000
+    damage: 12.0
+    radius: 12.0
+    knockback: 3.5
+    activation-trigger: ENTITY_HIT_SNEAK
+
+  EDICT:
+    death-message: "&c%victim% &7was sentenced to death by %killer%&7's &cEdict&7."
+    enabled: true
+    cooldown-ms: 12000
+    radius: 10.0
+    duration-ticks: 40
+    slowness-level: 10
+    weakness-level: 4
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  VACUUM_PUNCH:
+    death-message: "&c%victim% &7was punched into a vacuum by %killer%&7."
+    enabled: true
+    cooldown-ms: 12000
+    damage: 14.0
+    radius: 12.0
+    duration-ticks: 40
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  AERIAL_GRAB:
+    death-message: "&b%victim% &7was carried through the sky and dropped by %killer%&7."
+    enabled: true
+    cooldown-ms: 12000
+    damage: 1.5
+    target-radius: 10.0
+    duration-ticks: 60
+
+  AERIAL_SLAM:
+    death-message: "&3%victim% &7was pile-driven into the ground by %killer%&7."
+    enabled: true
+    cooldown-ms: 10000
+    damage: 14.0
+    knockback: 2.5
+    target-radius: 14.0
+    radius: 5.0
+
+
+
+  # ── ANGSTROM LEVY ──────────────────────────────────────────────────────────
+  DIMENSION_PORTAL:
+    death-message: "&5%victim% &7was portaled out of existence by %killer%&7."
+    enabled: true
+    cooldown-ms: 6000
+    range: 30.0
+    activation-trigger: RIGHT_CLICK_SNEAK
+
+  MULTIVERSE_DRAIN:
+    death-message: "&5%victim% &7was drained across dimensions by %killer%&7."
+    enabled: true
+    cooldown-ms: 14000
+    radius: 8.0
+    steal-percent: 20
+    max-steal: 5.0
+    strength-ticks: 80
+
+  KNOWLEDGE_SURGE:
+    death-message: "&5%victim% &7was surged by %killer%&7's &5Knowledge Surge&7."
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 80
+    resistance-level: 2
+
+  PORTAL_TRAP:
+    death-message: "&5%victim% &7fell into %killer%&7's &5Portal Trap&7."
+    enabled: true
+    cooldown-ms: 8000
+    trigger-radius: 2.5
+    teleport-height: 10.0
+    duration-ticks: 200
+
+  INTELLECT_BLAST:
+    death-message: "&5%victim% &7was blasted by %killer%&7's &5Intellect Blast&7."
+    enabled: true
+    cooldown-ms: 8000
+    damage: 8.0
+    range: 14.0
+
+  CROSS_DIMENSION:
+    death-message: "&5%victim% &7was cross-dimensioned by %killer%&7."
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 80
+    strength-level: 3
+
+  REALITY_TEAR:
+    death-message: "&5%victim% &7was torn from reality by %killer%&7."
+    enabled: true
+    cooldown-ms: 15000
+    damage: 13.0
+    radius: 16.0
+    knockback: 4.5
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  MULTIVERSE_STEP:
+    death-message: "&5%victim% &7was stepped through by %killer%&7."
+    enabled: true
+    cooldown-ms: 5000
+    velocity: 4.0
+    activation-trigger: RIGHT_CLICK_SNEAK
+
+  PARALLEL_STRIKE:
+    death-message: "&5%victim% &7was struck from every dimension by %killer%&7."
+    enabled: true
+    cooldown-ms: 10000
+    damage: 6.0
+    radius: 7.0
+
+  DIMENSIONAL_ANCHOR:
+    death-message: "&5%victim% &7was anchored in place then finished by %killer%&7."
+    enabled: true
+    cooldown-ms: 8000
+    radius: 6.0
+    duration-ticks: 60
+    slowness-level: 8
+    weakness-level: 2
+
+  RIFT_SHIELD:
+    death-message: "&5%victim% &7shattered against %killer%&7's &5Rift Shield&7."
+    enabled: true
+    cooldown-ms: 8000
+    duration-ticks: 80
+    resistance-level: 2
+    damage-reduction: 0.85
+    activation-trigger: RIGHT_CLICK
+
+  VOID_PULL:
+    death-message: "&5%victim% &7was pulled into the void by %killer%&7."
+    enabled: true
+    cooldown-ms: 14000
+    radius: 10.0
+    knockback: 2.5
+
+  # ── SHRINKING RAY ──────────────────────────────────────────────────────────
+  MINIATURIZE:
+    death-message: "&b%victim% &7was shrunk and stomped by %killer%&7."
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 80
+    speed-level: 3
+
+  MICRO_STRIKE:
+    death-message: "&b%victim% &7was struck from the inside by %killer%&7's &bMicro Strike&7."
+    enabled: true
+    cooldown-ms: 12000
+    damage: 8.0
+    radius: 4.0
+    poison-ticks: 60
+
+  SIZE_SHIFT:
+    death-message: "&b%victim% &7couldn't keep up with %killer%&7's &bSize Shift&7."
+    enabled: true
+    cooldown-ms: 8000
+    duration-ticks: 80
+    speed-level: 1
+
+  INTERNAL_ATTACK:
+    death-message: "&b%victim% &7was attacked internally by %killer%&7's &bInternal Attack&7."
+    enabled: true
+    cooldown-ms: 14000
+    damage: 9.0
+    radius: 4.0
+    poison-ticks: 60
+
+  SHRINK_DASH:
+    death-message: "&b%victim% &7was dashed through by a tiny %killer%&7."
+    enabled: true
+    cooldown-ms: 5000
+    velocity: 4.0
+    activation-trigger: RIGHT_CLICK_SNEAK
+
+  GIANT_FORM:
+    death-message: "&b%victim% &7was stepped on by %killer%&7's &bGiant Form&7."
+    enabled: true
+    cooldown-ms: 12000
+    duration-ticks: 100
+    strength-level: 4
+    resistance-level: 2
+    slowness-level: 1
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  SIZE_WAVE:
+    death-message: "&b%victim% &7was hit by %killer%&7's &bSize Wave&7."
+    enabled: true
+    cooldown-ms: 8000
+    radius: 10.0
+    slowness-ticks: 60
+    slowness-level: 2
+    weakness-ticks: 60
+
+  MICRO_BURST:
+    death-message: "&b%victim% &7was micro-burst by %killer%&7."
+    enabled: true
+    cooldown-ms: 15000
+    damage: 12.0
+    radius: 12.0
+    knockback: 3.5
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  SHRINK_BOMB:
+    death-message: "&b%victim% &7walked into %killer%&7's &bShrink Bomb&7."
+    enabled: true
+    cooldown-ms: 14000
+    radius: 6.0
+    duration-ticks: 60
+    slowness-level: 8
+    weakness-level: 2
+
+  GIANT_STOMP:
+    death-message: "&b%victim% &7was stomped flat by %killer%&7's &bGiant Stomp&7."
+    enabled: true
+    cooldown-ms: 12000
+    damage: 8.0
+    radius: 7.0
+    knockback: 2.0
+
+  PHASE_DODGE:
+    death-message: "&b%victim% &7couldn't hit what they couldn't see — killed by %killer%&7."
+    enabled: true
+    cooldown-ms: 14000
+    duration-ticks: 80
+    resistance-level: 3
+    regen-level: 1
+
+  TITAN_SLAM:
+    death-message: "&b%victim% &7was titan-slammed by %killer%&7."
+    enabled: true
+    cooldown-ms: 12000
+    damage: 11.0
+    radius: 10.0
+    knockback: 3.0
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  # ── CECILIA STEDMAN ────────────────────────────────────────────────────────
+  TACTICAL_COMMAND:
+    death-message: "&e%victim% &7was tactically eliminated by %killer%&7."
+    enabled: true
+    cooldown-ms: 14000
+    radius: 15.0
+    duration-ticks: 80
+    strength-level: 1
+
+  SHIELD_DEPLOY:
+    death-message: "&e%victim% &7broke against %killer%&7's &eShield Deploy&7."
+    enabled: true
+    cooldown-ms: 14000
+    radius: 8.0
+    duration-ticks: 80
+    resistance-level: 2
+
+  WEAPON_MASTERY:
+    death-message: "&e%victim% &7was outclassed by %killer%&7's &eWeapon Mastery&7."
+    enabled: true
+    cooldown-ms: 8000
+    duration-ticks: 60
+    strength-level: 2
+    haste-level: 1
+
+  STRATEGIC_STRIKE:
+    death-message: "&e%victim% &7was strategically eliminated by %killer%&7."
+    enabled: true
+    cooldown-ms: 14000
+    damage: 8.0
+    radius: 5.0
+    weakness-ticks: 80
+    slowness-ticks: 80
+
+  COORDINATED_ASSAULT:
+    death-message: "&e%victim% &7was assaulted from all angles by %killer%&7."
+    enabled: true
+    cooldown-ms: 14000
+    damage: 6.0
+    radius: 10.0
+    slowness-ticks: 40
+
+  FIELD_MEDIC:
+    death-message: "&e%victim% &7couldn't outlast %killer%&7's &eField Medic&7 heals."
+    enabled: true
+    cooldown-ms: 14000
+    heal: 8.0
+    regen-ticks: 60
+    regen-level: 1
+    activation-trigger: RIGHT_CLICK
+
+  INTEL_SCAN:
+    death-message: "&e%victim% &7had nowhere to run from %killer%&7's intel."
+    enabled: true
+    cooldown-ms: 6000
+    radius: 20.0
+
+  GOVERNMENT_BACKUP:
+    death-message: "&e%victim% &7was backed into the grave by %killer%&7."
+    enabled: true
+    cooldown-ms: 12000
+    duration-ticks: 80
+    strength-level: 3
+    speed-level: 1
+    resistance-level: 1
+    activation-trigger: RIGHT_CLICK
+
+  TACTICAL_RETREAT:
+    death-message: "&e%victim% &7chased %killer%&7 into a death trap."
+    enabled: true
+    cooldown-ms: 8000
+    velocity: 4.0
+    speed-ticks: 40
+    speed-level: 2
+    activation-trigger: RIGHT_CLICK_SNEAK
+
+  SUPPRESSION_FIRE:
+    death-message: "&e%victim% &7was suppressed to death by %killer%&7."
+    enabled: true
+    cooldown-ms: 14000
+    radius: 10.0
+    slowness-ticks: 80
+    weakness-ticks: 80
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  COUNTER_INTEL:
+    death-message: "&e%victim% &7couldn't counter %killer%&7's &eCounter Intel&7."
+    enabled: true
+    cooldown-ms: 8000
+    duration-ticks: 80
+    resistance-level: 3
+    regen-level: 1
+
+  ASSET_EXTRACTION:
+    death-message: "&e%victim% &7was extracted — permanently — by %killer%&7."
+    enabled: true
+    cooldown-ms: 10000
+    range: 30.0
+    activation-trigger: RIGHT_CLICK_SNEAK
+
+  GDA_AIRSTRIKE:
+    death-message: "&e%victim% &7called in their own airstrike by fighting %killer%&7."
+    enabled: true
+    cooldown-ms: 12000
+    damage: 10.0
+    aoe-radius: 7.0
+    explosion-power: 4.0
+    delay-ticks: 40
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  DRONE_BARRAGE:
+    death-message: "&e%victim% &7was barraged by %killer%&7's drones."
+    enabled: true
+    cooldown-ms: 8000
+    damage: 7.0
+    target-count: 3
+    target-range: 20.0
+
+  FREEZE_ASSETS:
+    death-message: "&e%victim% &7's assets — and life — were frozen by %killer%&7."
+    enabled: true
+    cooldown-ms: 10000
+    target-radius: 15.0
+    duration-ticks: 80
+    slowness-level: 8
+
+  RED_TAPE:
+    death-message: "&e%victim% &7got buried in %killer%&7's &eRed Tape&7."
+    enabled: true
+    cooldown-ms: 14000
+    radius: 10.0
+    duration-ticks: 80
+    slowness-level: 5
+    weakness-level: 3
+
+  NANITE_INJECTION:
+    death-message: "&e%victim% &7was injected into oblivion by %killer%&7."
+    enabled: true
+    cooldown-ms: 8000
+    duration-ticks: 100
+    regen-level: 2
+    absorption-level: 1
+    activation-trigger: RIGHT_CLICK
+
+  LOCKDOWN:
+    death-message: "&e%victim% &7was locked down and finished by %killer%&7."
+    enabled: true
+    cooldown-ms: 12000
+    radius: 12.0
+    duration-ticks: 80
+    slowness-level: 4
+    weakness-level: 2
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  FIELD_COMMANDER:
+    death-message: "&e%victim% &7fell to %killer%&7's superior command."
+    enabled: true
+    cooldown-ms: 15000
+    radius: 15.0
+    duration-ticks: 80
+    strength-level: 1
+    speed-level: 1
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  BLACK_SITE:
+    death-message: "&e%victim% &7was sent to a &eBlack Site&7 they'll never leave."
+    enabled: true
+    cooldown-ms: 12000
+    target-radius: 15.0
+    teleport-height: 15.0
+    activation-trigger: RIGHT_CLICK_SNEAK
+
+  CLASSIFIED:
+    death-message: "&e%victim% &7's death is now classified, courtesy of %killer%&7."
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 40
+    resistance-level: 3
+
+  AUTHORITY_OVERRIDE:
+    death-message: "&e%victim% &7was overridden by %killer%&7's authority."
+    enabled: true
+    cooldown-ms: 10000
+    damage: 5.0
+    radius: 10.0
+    duration-ticks: 60
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  # ── IMMORTAL ───────────────────────────────────────────────────────────────
+  ANCIENT_FURY:
+    death-message: "&6%victim% &7was caught in %killer%&7's &6Ancient Fury&7."
+    enabled: true
+    cooldown-ms: 15000
+    damage: 10.0
+    radius: 9.0
+    knockback: 3.0
+    strength-ticks: 60
+    strength-level: 2
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  TIME_HARDENED:
+    death-message: "&6%victim% &7couldn't outlast %killer%&7's millennia of endurance."
+    enabled: true
+    cooldown-ms: 10000
+    duration-ticks: 80
+    resistance-level: 3
+    activation-trigger: RIGHT_CLICK
+
+  RESURRECTION_SURGE:
+    death-message: "&6%victim% &7couldn't outlive %killer%&7's &6Resurrection Surge&7."
+    enabled: true
+    cooldown-ms: 15000
+    heal-percent: 50.0
+    min-heal: 8.0
+    regen-ticks: 80
+    regen-level: 2
+    activation-trigger: RIGHT_CLICK
+
+  TIMELESS_STRIKE:
+    death-message: "&6%victim% &7was struck down across time by %killer%&7."
+    enabled: true
+    cooldown-ms: 14000
+    damage: 10.0
+    radius: 4.5
+    execute-threshold-percent: 30
+
+  UNDYING_WILL:
+    death-message: "&6%victim% &7broke against %killer%&7's &6Undying Will&7."
+    enabled: true
+    cooldown-ms: 12000
+    duration-ticks: 60
+    resistance-level: 4
+    regen-level: 2
+    activation-trigger: RIGHT_CLICK
+
+  ANCIENT_LEAP:
+    death-message: "&6%victim% &7was leapt upon by %killer%&7's ancient power."
+    enabled: true
+    cooldown-ms: 8000
+    velocity: 3.0
+    target-radius: 18.0
+
+  # ── DARKWING ───────────────────────────────────────────────────────────────
+  GRAPPLE_LINE:
+    death-message: "&8%victim% &7was grappled to their doom by %killer%&7."
+    enabled: true
+    cooldown-ms: 5000
+    velocity: 4.0
+    target-radius: 18.0
+
+  SMOKE_BOMB:
+    death-message: "&8%victim% &7couldn't see %killer%&7 through the &8Smoke Bomb&7."
+    enabled: true
+    cooldown-ms: 14000
+    duration-ticks: 60
+    radius: 6.0
+    blindness-ticks: 40
+    slowness-ticks: 40
+
+  WING_STRIKE:
+    death-message: "&8%victim% &7was struck from the shadows by %killer%&7."
+    enabled: true
+    cooldown-ms: 10000
+    damage: 6.0
+    target-radius: 5.0
+
+  BATARANG_VOLLEY:
+    death-message: "&8%victim% &7was peppered by %killer%&7's &8Batarang Volley&7."
+    enabled: true
+    cooldown-ms: 8000
+    damage: 5.0
+    range: 16.0
+    spread-count: 5
+    slowness-ticks: 40
+
+  DARK_SILENCE:
+    death-message: "&8%victim% &7was silenced permanently by %killer%&7."
+    enabled: true
+    cooldown-ms: 12000
+    damage: 11.0
+    range: 12.0
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  CAPE_GLIDE:
+    death-message: "&8%victim% &7was dive-bombed by %killer%&7."
+    enabled: true
+    cooldown-ms: 5000
+    velocity: 4.0
+    speed-ticks: 40
+    speed-level: 2
+    activation-trigger: RIGHT_CLICK_SNEAK
+
+  STEALTH_MODE:
+    death-message: "&8%victim% &7never even saw %killer%&7 coming."
+    enabled: true
+    cooldown-ms: 14000
+    duration-ticks: 80
+    speed-level: 1
+
+  # ── OLIVER GRAYSON ─────────────────────────────────────────────────────────
+  BLUE_FLAME:
+    death-message: "&9%victim% &7was incinerated by %killer%&7's &9Blue Flame&7."
+    enabled: true
+    cooldown-ms: 8000
+    damage: 7.0
+    range: 14.0
+    fire-ticks: 80
+    weakness-ticks: 60
+
+  HALF_BREED_SURGE:
+    death-message: "&9%victim% &7couldn't survive %killer%&7's &9Half Breed Surge&7."
+    enabled: true
+    cooldown-ms: 15000
+    duration-ticks: 80
+    strength-level: 4
+    speed-level: 2
+    resistance-level: 2
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  HEAT_VISION:
+    death-message: "&9%victim% &7was melted by %killer%&7's &9Heat Vision&7."
+    enabled: true
+    cooldown-ms: 8000
+    damage: 8.0
+    range: 20.0
+    fire-ticks: 80
+
+  SUPER_BREATH:
+    death-message: "&9%victim% &7was blown away by %killer%&7's &9Super Breath&7."
+    enabled: true
+    cooldown-ms: 14000
+    radius: 10.0
+    knockback: 3.5
+    slowness-ticks: 80
+    slowness-level: 3
+
+  TECH_JACKET_BOOST:
+    death-message: "&9%victim% &7couldn't keep up with %killer%&7's &9Tech Jacket Boost&7."
+    enabled: true
+    cooldown-ms: 8000
+    velocity: 5.0
+
+  FULL_POWER:
+    death-message: "&9%victim% &7faced %killer%&7 at &9Full Power&7 and lost."
+    enabled: true
+    cooldown-ms: 15000
+    damage: 13.0
+    radius: 12.0
+    knockback: 4.0
+    activation-trigger: LEFT_CLICK_SNEAK
+
+  # ── UNIVERSAL ──────────────────────────────────────────────────────────────
+  GRAPPLE:
+    death-message: "&7%victim% &7was grappled and slammed by %killer%&7."
+    enabled: true
+    cooldown-ms: 6000
+    damage: 6.0
+    range: 5.0
+    velocity: 1.8
+    duration-ticks: 40
+    activation-trigger: LEFT_CLICK
+
+  REGENT_CHARGE:
+    death-message: "&c%victim% &7was charged through by %killer%&7's &cRegent Charge&7."
+    enabled: true
+    cooldown-ms: 10000
+    damage: 7.0
+    velocity: 5.5
+    strike-radius: 2.5
+    strike-ticks: 10
